@@ -1,0 +1,55 @@
+{
+  "updated": "2026-11-07T12:00:00+01:00",
+  "cruise": {
+    "id": "NO07270424",
+    "title": "Skandinavische Highlights ab Hamburg",
+    "ship": "AIDAnova",
+    "from": "2027-04-24",
+    "to": "2027-05-01",
+    "nights": 7,
+    "port": "Hamburg",
+    "departure": "24.04.2027, 17:00 Uhr",
+    "arrival": "01.05.2027, 08:00 Uhr",
+    "route": ["Hamburg", "Seetag", "Oslo", "Kristiansand", "Skagen", "Kopenhagen", "Seetag", "Hamburg"],
+    "url": "https://aida.de/finden/NO07270424/PREMIUM?pax[adults]=2&pax[juveniles]=0&pax[children]=0&pax[babies]=0",
+    "earlyBird": "Frühbucher Plus: 300 € Rabatt pro Kabine (Einzelkabine 150 €) ist in den Preisen schon abgezogen"
+  },
+  "tariffs": {
+    "LIGHT": false,
+    "CLASSIC": false,
+    "PREMIUM": true,
+    "PREMIUM_AI": true
+  },
+  "cabins": [
+    { "code": "I", "name": "Innenkabine",           "prem": {"1": 1585, "2": 1730, "3": 1950, "4": 2090}, "ai": {"1": 1815, "2": 2190, "3": 2640, "4": 3010} },
+    { "code": "M", "name": "Meerblickkabine",       "prem": {"1": 2000, "2": 2220, "3": 2360, "4": 2640}, "ai": {"1": 2230, "2": 2680, "3": 3050, "4": 3560} },
+    { "code": "B", "name": "Balkonkabine",          "prem": {"1": 2230, "2": 2500, "3": 2640, "4": 2780}, "ai": {"1": 2460, "2": 2960, "3": 3330, "4": 3700} },
+    { "code": "K", "name": "Verandakabine Komfort", "prem": {"1": 2340, "2": 2620, "3": 2760, "4": 2900}, "ai": {"1": 2570, "2": 3080, "3": 3450, "4": 3820} },
+    { "code": "D", "name": "Verandakabine Deluxe",  "prem": {"1": 2775, "2": 3130, "3": 3270, "4": 3410}, "ai": {"1": 3005, "2": 3590, "3": 3960, "4": 4330} },
+    { "code": "J", "name": "Junior-Suite",          "prem": {"1": 3490, "2": 3980, "3": 4120, "4": 4260}, "ai": {"1": 3720, "2": 4440, "3": 4810, "4": 5180} },
+    { "code": "S", "name": "Suite",                 "prem": {"2": 5260, "3": 5400, "4": 5540}, "ai": {"2": 5720, "3": 6090, "4": 6460} }
+  ],
+  "rail": {
+    "from": "Hanau Hbf",
+    "to": "Hamburg Hbf",
+    "note": "Sparpreise ohne BahnCard, Preis für die ganze Gruppe. Ab 6 Personen gilt automatisch der Gruppen-Sparpreis.",
+    "hin": [
+      { "ab": "06:15", "an": "10:29", "zug": "RB/RE → ICE 776",  "k2": {"1": 49.99, "5": 249.95, "6": 197.94}, "k1": {"5": 294.95, "6": 257.94} },
+      { "ab": "06:45", "an": "10:57", "zug": "RB/RE → ICE 686",  "k2": {"1": 46.99, "5": 234.95, "6": 197.94}, "k1": {"5": 289.95, "6": 257.94} },
+      { "ab": "07:11", "an": "11:29", "zug": "RB/RE → ICE 76",   "k2": {"1": 59.99, "5": 299.95, "6": 221.94}, "k1": {"5": 374.95, "6": 323.94} },
+      { "ab": "07:45", "an": "11:58", "zug": "RB/RE → ICE 886",  "k2": {"1": 54.99, "5": 274.95, "6": 197.94}, "k1": {"5": 349.95, "6": 257.94} },
+      { "ab": "08:16", "an": "12:29", "zug": "RB/RE → ICE 1274", "k2": {"1": 73.99, "5": 369.95, "6": 353.94}, "k1": {"5": 464.95, "6": 467.94} }
+    ],
+    "rueck": [
+      { "ab": "09:30", "an": "13:44", "zug": "ICE 1177 → RB/RE", "k2": {"5": 299.95, "6": 299.94}, "k1": {"5": 374.95, "6": 371.94} },
+      { "ab": "10:01", "an": "14:11", "zug": "ICE 787 → RB/RE",  "k2": {"5": 234.95, "6": 197.94}, "k1": {"5": 309.95, "6": 287.94} },
+      { "ab": "10:29", "an": "14:44", "zug": "ICE 73 → RB/RE",   "k2": {"5": 199.95, "6": 197.94}, "k1": {"5": 274.95, "6": 269.94} },
+      { "ab": "11:01", "an": "15:15", "zug": "ICE 587 → RB/RE",  "k2": {"5": 199.95, "6": 197.94}, "k1": {"5": 274.95, "6": 287.94} },
+      { "ab": "11:29", "an": "15:44", "zug": "ICE 1179 → RB/RE", "k2": {"5": 249.95, "6": 197.94}, "k1": {"5": 324.95, "6": 287.94} }
+    ]
+  },
+  "history": [
+    { "date": "2026-11-07", "I2": 1730, "I2AI": 2190, "I3": 1950, "I3AI": 2640, "B2": 2500, "B2AI": 2960, "B3": 2640, "B3AI": 3330, "railHin6": 197.94, "railRueck6": 197.94, "railHin5": 234.95, "railRueck5": 199.95 }
+  ],
+  "alerts": []
+}

@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skandinavien-Kreuzfahrt 2027</title>
+<meta name="description" content="Preise, Kabinen-Konstellationen und Bahnanreise für unsere AIDAnova-Reise 24.04.–01.05.2027">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f8fb; --card:#ffffff; --ink:#101828; --muted:#475467; --line:#e4e7ec;
+  --accent:#0b5cad; --accent-soft:#e7f0fb; --good:#127a3e; --good-soft:#e5f5ec;
+  --warn:#b54708; --warn-soft:#fef0e1; --bad:#b42318; --bad-soft:#fdeceb; --ai:#7a2e9e; --ai-soft:#f4eafa;
+  --radius:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e141c; --card:#16202b; --ink:#eef2f6; --muted:#a7b3c2; --line:#26323f;
+    --accent:#6aa9ec; --accent-soft:#132a42; --good:#4fd18b; --good-soft:#123222; --warn:#f5a85b; --warn-soft:#3a2614;
+    --bad:#f47b70; --bad-soft:#3a1714; --ai:#d19af0; --ai-soft:#2c1838;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e141c; --card:#16202b; --ink:#eef2f6; --muted:#a7b3c2; --line:#26323f;
+  --accent:#6aa9ec; --accent-soft:#132a42; --good:#4fd18b; --good-soft:#123222; --warn:#f5a85b; --warn-soft:#3a2614;
+  --bad:#f47b70; --bad-soft:#3a1714; --ai:#d19af0; --ai-soft:#2c1838;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+a{color:var(--accent)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+header.hero{background:linear-gradient(135deg,#0b3d75,#0b5cad 60%,#1d7fd6);color:#fff;padding:28px 0 22px}
+.hero h1{margin:0 0 6px;font-size:clamp(22px,4vw,32px);line-height:1.2}
+.hero .sub{opacity:.9}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:4px 10px;border-radius:999px;font-size:13px}
+.route{margin-top:12px;font-size:13px;opacity:.9}
+nav.tabs{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line)}
+nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+nav.tabs a{padding:12px 12px;white-space:nowrap;text-decoration:none;color:var(--muted);font-weight:500;border-bottom:2px solid transparent}
+nav.tabs a:hover{color:var(--ink)}
+section{padding:22px 0 6px}
+h2{font-size:20px;margin:0 0 4px}
+.lead{color:var(--muted);margin:0 0 14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.reco{position:relative}
+.reco .rank{font-size:12px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.04em}
+.reco .big{font-size:26px;font-weight:700;margin:4px 0 0}
+.reco .pp{color:var(--muted)}
+.reco ul{margin:10px 0 0;padding-left:18px}
+.tag{display:inline-block;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px;vertical-align:middle}
+.tag.ai{background:var(--ai-soft);color:var(--ai)}
+.tag.ok{background:var(--good-soft);color:var(--good)}
+.tag.warn{background:var(--warn-soft);color:var(--warn)}
+.tag.bad{background:var(--bad-soft);color:var(--bad)}
+.tag.info{background:var(--accent-soft);color:var(--accent)}
+.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 18px}
+.controls label{font-size:13px;color:var(--muted);display:block;margin-bottom:4px;font-weight:500}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.seg button{border:0;background:transparent;color:var(--ink);padding:7px 14px;font:inherit;cursor:pointer}
+.seg button.on{background:var(--accent);color:#fff}
+.checks{display:flex;flex-wrap:wrap;gap:6px}
+.checks label{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:4px 10px;margin:0;color:var(--ink);font-size:13px;cursor:pointer}
+select,input[type=number]{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:6px 8px;width:100%}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);font-weight:600;background:var(--bg);position:sticky;top:0}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--accent-soft)}
+.cab{display:block;white-space:nowrap}
+.muted{color:var(--muted)}
+.small{font-size:12.5px}
+.note{border-left:3px solid var(--accent);background:var(--accent-soft);padding:10px 12px;border-radius:8px;margin:12px 0}
+.note.warn{border-color:var(--warn);background:var(--warn-soft)}
+.note.good{border-color:var(--good);background:var(--good-soft)}
+.timeline{list-style:none;padding:0;margin:0}
+.timeline li{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
+.timeline li:last-child{border:0}
+.timeline b{color:var(--accent)}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:10px;padding:10px 14px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none}
+.btn.wa{background:#1f9d55;color:#fff}
+.btn.sec{background:var(--accent-soft);color:var(--accent)}
+footer{padding:28px 0 40px;color:var(--muted);font-size:13px}
+#chart svg{width:100%;height:auto;display:block}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:13px;margin-top:8px}
+.legend i{display:inline-block;width:12px;height:3px;border-radius:2px;margin-right:6px;vertical-align:middle}
+@media (max-width:600px){ .timeline li{grid-template-columns:1fr;gap:2px} th,td{padding:8px 7px} }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <h1 id="title">Skandinavische Highlights ab Hamburg</h1>
+    <div class="sub" id="sub">AIDAnova · 24.04. – 01.05.2027 · 7 Nächte</div>
+    <div class="chips" id="chips"></div>
+    <div class="route" id="route"></div>
+  </div>
+</header>
+
+<nav class="tabs"><div class="wrap">
+  <a href="#empfehlung">Empfehlung</a>
+  <a href="#rechner">Konstellationen</a>
+  <a href="#kabinen">Kabinenpreise</a>
+  <a href="#bahn">Bahn</a>
+  <a href="#verlauf">Preisverlauf</a>
+  <a href="#timing">Wann buchen?</a>
+</div></nav>
+
+<main class="wrap">
+
+<section id="empfehlung">
+  <h2>Unsere günstigsten Varianten</h2>
+  <p class="lead">Kreuzfahrt + Bahn Hanau ⇄ Hamburg (2. Klasse), mindestens eine Kabine mit All Inclusive. Budget: <b>1.200 € pro Person</b>.</p>
+  <div id="alerts"></div>
+  <h3 class="small muted" style="margin:14px 0 8px">Bei 6 Personen</h3>
+  <div class="grid3" id="reco6"></div>
+  <h3 class="small muted" style="margin:18px 0 8px">Bei 5 Personen</h3>
+  <div class="grid3" id="reco5"></div>
+</section>
+
+<section id="rechner">
+  <h2>Konstellations-Rechner</h2>
+  <p class="lead">Alle sinnvollen Aufteilungen der Gruppe auf Kabinen, sortiert nach Gesamtpreis. Die Filter verändern die Liste sofort.</p>
+  <div class="card controls">
+    <div><label>Personen</label><div class="seg" id="segN"><button data-v="5">5</button><button data-v="6" class="on">6</button></div></div>
+    <div><label>Kabinen mit All Inclusive (mind.)</label><div class="seg" id="segAI"><button data-v="1" class="on">1</button><button data-v="2">2</button><button data-v="9">alle</button></div></div>
+    <div><label>Bahn</label><div class="seg" id="segRail"><button data-v="2" class="on">2. Kl.</button><button data-v="1">1. Kl.</button><button data-v="0">ohne</button></div></div>
+    <div><label>Max. Personen pro Kabine</label><div class="seg" id="segMax"><button data-v="2">2</button><button data-v="3">3</button><button data-v="4" class="on">4</button></div></div>
+    <div style="grid-column:1/-1"><label>Kabinenkategorien</label><div class="checks" id="cats"></div></div>
+    <div><label><input type="checkbox" id="singles"> Einzelkabinen erlauben</label></div>
+    <div><label><input type="checkbox" id="mix" checked> Kategorien mischen erlauben</label></div>
+    <div><label for="budget">Budget p. P. (€)</label><input type="number" id="budget" value="1200" step="50"></div>
+  </div>
+  <p class="small muted" id="count" style="margin:10px 0 6px"></p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>#</th><th>Aufteilung</th><th>Kabinen</th><th class="num">Schiff</th><th class="num">Bahn</th><th class="num">Gesamt</th><th class="num">Ø p. P.</th><th class="num">Spanne p. P.</th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table></div>
+  <p class="small muted">„Spanne p. P.“: Wer in der günstigsten bzw. teuersten Kabine schläft, zahlt so viel (Kabine geteilt durch Belegung + Bahnanteil). All Inclusive gilt bei AIDA für die ganze Kabine, also für alle, die darin wohnen.</p>
+</section>
+
+<section id="kabinen">
+  <h2>Kabinenpreise</h2>
+  <p class="lead">Preis <b>pro Kabine</b> (in Klammern pro Person), Tarif PREMIUM bzw. PREMIUM All Inclusive, ohne Anreise. Frühbucher-Rabatt bereits abgezogen.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Kategorie</th><th class="num">1 Pers.</th><th class="num">2 Pers.</th><th class="num">3 Pers.</th><th class="num">4 Pers.</th></tr></thead>
+    <tbody id="cabinRows"></tbody>
+  </table></div>
+  <div class="note" id="tariffNote"></div>
+</section>
+
+<section id="bahn">
+  <h2>Bahn Hanau ⇄ Hamburg</h2>
+  <p class="lead" id="railLead"></p>
+  <div class="grid3">
+    <div class="card"><h3 style="margin:0 0 8px;font-size:16px">Hinfahrt Sa 24.04.2027</h3><div class="tablewrap" style="border:0"><table><thead><tr><th>Zug</th><th class="num">5 Pers.</th><th class="num">6 Pers.</th></tr></thead><tbody id="railHin"></tbody></table></div></div>
+    <div class="card"><h3 style="margin:0 0 8px;font-size:16px">Rückfahrt Sa 01.05.2027</h3><div class="tablewrap" style="border:0"><table><thead><tr><th>Zug</th><th class="num">5 Pers.</th><th class="num">6 Pers.</th></tr></thead><tbody id="railRueck"></tbody></table></div></div>
+  </div>
+  <div class="note good" id="railTip"></div>
+  <p class="small muted">Preise 2. Klasse, ganze Gruppe, ohne BahnCard. Einstieg spätestens ca. 3 Stunden vor Abfahrt (17:00) einplanen: Ankunft Hamburg vor 12 Uhr ist ideal. Rückfahrt: Ausschiffung ab ca. 8 Uhr, daher Züge ab 10 Uhr. Der 01.05. ist Feiertag, Züge sind voll – Sitzplätze reservieren!</p>
+</section>
+
+<section id="verlauf">
+  <h2>Preisverlauf</h2>
+  <p class="lead">Ein Agent prüft täglich AIDA und die Bahn. Jeder Punkt ist eine Messung.</p>
+  <div class="card"><div id="chart"></div><div class="legend" id="legend"></div></div>
+  <div class="tablewrap" style="margin-top:12px"><table><thead id="histHead"></thead><tbody id="histRows"></tbody></table></div>
+</section>
+
+<section id="timing">
+  <h2>Wann buchen?</h2>
+  <p class="lead">Unser Fahrplan bis zur Buchung.</p>
+  <div class="card"><ul class="timeline">
+    <li><b>bis 30.11.2026</b><span>Klären, ob wir 5 oder 6 sind. Wer schläft mit wem? Wer will All Inclusive?</span></li>
+    <li><b>sofort danach</b><span>Kreuzfahrt buchen, solange <i>Frühbucher Plus</i> (300 € pro Kabine) gilt. Die günstigen Kabinen in den beliebten 3er/4er-Belegungen sind zuerst weg. Tarif PREMIUM ist flexibel (Umbuchung möglich) – fällt der Preis später, kann man nachfragen.</span></li>
+    <li><b>parallel</b><span>Bahn bereits jetzt buchbar (Vorverkauf 12 Monate). Sparpreise steigen meist, je näher der Termin rückt. Gruppen-Sparpreis für 6 Personen + Sitzplätze buchen.</span></li>
+    <li><b>bis Abreise</b><span>Agent beobachtet weiter: neue günstigere Tarife (LIGHT/CLASSIC), Aktionen, Preissenkungen. Bei einer Senkung bei AIDA anfragen.</span></li>
+  </ul></div>
+  <div class="note warn">Die günstigsten Tarife (LIGHT, CLASSIC) sind für diese Reise derzeit <b>nicht verfügbar</b>. Der Agent meldet, falls sie auftauchen.</div>
+  <p style="margin-top:16px"><a class="btn wa" id="waBtn" target="_blank" rel="noopener">In WhatsApp teilen</a> <a class="btn sec" id="aidaBtn" target="_blank" rel="noopener">Reise bei AIDA ansehen</a></p>
+</section>
+
+</main>
+<footer><div class="wrap">
+  <div id="updated"></div>
+  <div>Alle Angaben ohne Gewähr. Preise ändern sich laufend; verbindlich ist nur der Preis bei der Buchung.</div>
+</div></footer>
+
+<script>
+const eur = v => v==null ? '–' : v.toLocaleString('de-DE',{style:'currency',currency:'EUR',maximumFractionDigits:0});
+const eur2 = v => v==null ? '–' : v.toLocaleString('de-DE',{style:'currency',currency:'EUR',minimumFractionDigits:2});
+const fmtDate = s => new Date(s).toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit',year:'numeric'});
+const $ = id => document.getElementById(id);
+let D, state = {n:6, ai:1, rail:'2', max:4, singles:false, mix:true, budget:1200, cats:new Set(['I','M','B'])};
+
+fetch('data/prices.json?'+Date.now()).then(r=>r.json()).then(d=>{D=d; init();}).catch(e=>{console.error(e);document.querySelector('main').insertAdjacentHTML('afterbegin','<p class="note warn">Preisdaten konnten nicht geladen werden.</p>')});
+
+function init(){
+  const c=D.cruise;
+  $('title').textContent=c.title;
+  $('sub').textContent=`${c.ship} · ${fmtDate(c.from)} – ${fmtDate(c.to)} · ${c.nights} Nächte · ab/bis ${c.port}`;
+  $('chips').innerHTML=[`Abfahrt ${c.departure}`,`Ankunft ${c.arrival}`,'Bahn ab Hanau Hbf','5–6 Erwachsene'].map(x=>`<span class="chip">${x}</span>`).join('');
+  $('route').textContent='Route: '+c.route.join(' → ');
+  $('updated').textContent='Preise zuletzt geprüft: '+new Date(D.updated).toLocaleString('de-DE',{dateStyle:'full',timeStyle:'short'});
+  $('aidaBtn').href=c.url;
+  $('waBtn').href='https://wa.me/?text='+encodeURIComponent('Kreuzfahrt 2027 – aktuelle Preise & Kabinen-Varianten: '+location.href.split('#')[0]);
+  $('cats').innerHTML=D.cabins.map(k=>`<label><input type="checkbox" value="${k.code}" ${state.cats.has(k.code)?'checked':''}> ${k.name}</label>`).join('');
+  $('cats').addEventListener('change',e=>{e.target.checked?state.cats.add(e.target.value):state.cats.delete(e.target.value);render();});
+  seg('segN','n',Number); seg('segAI','ai',Number); seg('segRail','rail',String); seg('segMax','max',Number);
+  $('singles').onchange=e=>{state.singles=e.target.checked;render();};
+  $('mix').onchange=e=>{state.mix=e.target.checked;render();};
+  $('budget').oninput=e=>{state.budget=Number(e.target.value)||0;render();renderReco();};
+  renderAlerts(); renderCabins(); renderRail(); renderHistory(); renderReco(); render();
+}
+function seg(id,key,cast){ $(id).addEventListener('click',e=>{const b=e.target.closest('button'); if(!b)return; [...$(id).children].forEach(x=>x.classList.toggle('on',x===b)); state[key]=cast(b.dataset.v); render();}); }
+
+/* ---------- Bahn ---------- */
+function railCost(n, kl){
+  if(kl==='0') return {total:0, txt:'ohne Bahn'};
+  const key='k'+kl;
+  const best = list => {
+    let o=null;
+    for(const t of list){
+      const p=t[key]||{};
+      const cand=[];
+      if(p[n]!=null) cand.push({price:p[n], how:`${n} Pers.`});
+      if(n<6 && p['6']!=null) cand.push({price:p['6'], how:'Gruppenticket 6 Pers.'});
+      for(const c of cand) if(!o||c.price<o.price) o={...c, t};
+    }
+    return o;
+  };
+  const h=best(D.rail.hin), r=best(D.rail.rueck);
+  return {total:h.price+r.price, h, r, txt:`Hin ${h.t.ab} (${eur2(h.price)}${h.how.startsWith('Gruppen')?', als 6er-Gruppe':''}), Rück ${r.t.ab} (${eur2(r.price)}${r.how.startsWith('Gruppen')?', als 6er-Gruppe':''})`};
+}
+
+/* ---------- Konstellationen ---------- */
+function partitions(n, max, minPart){
+  const out=[];
+  (function rec(rem, maxPart, acc){
+    if(rem===0){out.push(acc.slice());return;}
+    for(let p=Math.min(rem,maxPart); p>=minPart; p--){acc.push(p);rec(rem-p,p,acc);acc.pop();}
+  })(n,max,[]);
+  return out;
+}
+function combos(opts){
+  const n=opts.n;
+  let parts=partitions(n, opts.max, 1).filter(p=>p.length<=3);
+  if(!opts.singles) parts=parts.filter(p=>!p.includes(1));
+  else parts=parts.filter(p=>p.filter(x=>x===1).length<=1);
+  const cabins=D.cabins.filter(c=>opts.cats.has(c.code));
+  const variants=[];
+  for(const k of cabins) for(const ai of [false,true]) variants.push({k,ai});
+  const res=[]; const seen=new Set();
+  for(const part of parts){
+    const pick=(i,acc)=>{
+      if(i===part.length){
+        const aiCount=acc.filter(x=>x.ai).length;
+        const need=opts.ai===9?part.length:opts.ai;
+        if(aiCount<need) return;
+        if(!opts.mix && new Set(acc.map(x=>x.k.code)).size>1) return;
+        const key=acc.map((x,j)=>part[j]+x.k.code+(x.ai?'A':'')).sort().join('|');
+        if(seen.has(key)) return; seen.add(key);
+        let ship=0; const cab=[];
+        for(let j=0;j<part.length;j++){
+          const x=acc[j], occ=part[j];
+          const price=(x.ai?x.k.ai:x.k.prem)[occ];
+          if(price==null) return;
+          ship+=price; cab.push({occ, name:x.k.name, code:x.k.code, ai:x.ai, price});
+        }
+        res.push({part, cab, ship});
+        return;
+      }
+      for(const v of variants) pick(i+1, acc.concat([v]));
+    };
+    pick(0,[]);
+  }
+  const rail=railCost(n, opts.rail);
+  for(const r of res){
+    r.rail=rail.total; r.railInfo=rail; r.total=r.ship+r.rail; r.avg=r.total/n;
+    const railPP=rail.total/n;
+    const pps=r.cab.map(c=>c.price/c.occ+railPP);
+    r.min=Math.min(...pps); r.max=Math.max(...pps);
+  }
+  res.sort((a,b)=>a.total-b.total);
+  return res;
+}
+function budgetTag(v, budget){
+  if(v<=budget*0.9) return '<span class="tag ok">im Budget</span>';
+  if(v<=budget) return '<span class="tag warn">knapp</span>';
+  return '<span class="tag bad">über Budget</span>';
+}
+function cabList(r){
+  return r.cab.slice().sort((a,b)=>b.occ-a.occ).map(c=>`<span class="cab">${c.occ}× ${c.name} ${c.ai?'<span class="tag ai">AI</span>':''} <span class="muted small">${eur(c.price)}</span></span>`).join('');
+}
+function render(){
+  if(!D) return;
+  const list=combos(state);
+  $('count').textContent=`${list.length} Varianten gefunden · Bahn: ${railCost(state.n,state.rail).txt}`;
+  $('rows').innerHTML=list.slice(0,60).map((r,i)=>`<tr>
+    <td class="muted">${i+1}</td>
+    <td style="white-space:nowrap"><b>${r.part.join(' + ')}</b></td>
+    <td>${cabList(r)}</td>
+    <td class="num">${eur(r.ship)}</td>
+    <td class="num">${eur(r.rail)}</td>
+    <td class="num"><b>${eur(r.total)}</b></td>
+    <td class="num"><b>${eur(r.avg)}</b><br>${budgetTag(r.avg,state.budget)}</td>
+    <td class="num small">${eur(r.min)} – ${eur(r.max)}</td>
+  </tr>`).join('') || '<tr><td colspan="8" class="muted">Keine Variante passt zu den Filtern.</td></tr>';
+}
+function renderReco(){
+  const base={ai:1, rail:'2', max:4, singles:true, mix:true, cats:new Set(D.cabins.map(c=>c.code)), budget:state.budget};
+  const pickSet=(n)=>{
+    const all=combos({...base,n});
+    const out=[];
+    const add=(label,r,why)=>{ if(r && !out.find(o=>o.r===r)) out.push({label,r,why}); };
+    add('Am günstigsten', all[0], 'Niedrigster Gesamtpreis inkl. Bahn.');
+    add('Max. 3 pro Kabine', all.find(r=>Math.max(...r.part)<=3), 'Mehr Platz: keine 4er-Kabine.');
+    add('Mit Balkon', all.find(r=>r.cab.every(c=>['B','K','D','J','S'].includes(c.code))), 'Alle Kabinen mit Balkon/Veranda.');
+    add('Paare (je 2)', all.find(r=>r.part.every(p=>p===2)), 'Drei Doppelkabinen, eine davon All Inclusive.');
+    return out.slice(0,3);
+  };
+  for(const n of [6,5]){
+    $('reco'+n).innerHTML=pickSet(n).map(({label,r,why})=>`<div class="card reco">
+      <div class="rank">${label}</div>
+      <div class="big">${eur(r.avg)} <span class="pp small">Ø pro Person</span></div>
+      <div class="small muted">Gesamt ${eur(r.total)} · ${budgetTag(r.avg,state.budget)}</div>
+      <ul class="small">${r.cab.slice().sort((a,b)=>b.occ-a.occ).map(c=>`<li>${c.occ} Pers. ${c.name} ${c.ai?'<span class="tag ai">AI</span>':''} – ${eur(c.price/c.occ)} p. P.</li>`).join('')}<li>Bahn 2. Kl.: ${eur(r.rail/n)} p. P.</li></ul>
+      <div class="small muted" style="margin-top:6px">${why}</div>
+    </div>`).join('');
+  }
+}
+
+/* ---------- Kabinen ---------- */
+function renderCabins(){
+  $('cabinRows').innerHTML=D.cabins.map(k=>{
+    const cell=(o,n)=>o[n]==null?'<td class="num muted">–</td>':`<td class="num">${eur(o[n])}<br><span class="small muted">(${eur(o[n]/n)})</span></td>`;
+    return `<tr><td><b>${k.name}</b><br><span class="small muted">PREMIUM</span></td>${[1,2,3,4].map(n=>cell(k.prem,n)).join('')}</tr>
+            <tr><td><b>${k.name}</b><br><span class="tag ai">All Inclusive</span></td>${[1,2,3,4].map(n=>cell(k.ai,n)).join('')}</tr>`;
+  }).join('');
+  const t=D.tariffs; const off=Object.entries(t).filter(([k,v])=>!v).map(([k])=>k);
+  $('tariffNote').innerHTML=`All Inclusive kostet hier rund <b>230 € pro Person</b> mehr (Getränke-Paket, WLAN u. a.). ${D.cruise.earlyBird}.` + (off.length?` Derzeit nicht buchbar: ${off.join(', ')}.`:'');
+}
+
+/* ---------- Bahn ---------- */
+function renderRail(){
+  const row=t=>`<tr><td><b>${t.ab}</b> → ${t.an}<br><span class="small muted">${t.zug}</span></td><td class="num">${eur2(t.k2['5'])}</td><td class="num">${eur2(t.k2['6'])}<br><span class="small muted">${eur2(t.k2['6']/6)} p. P.</span></td></tr>`;
+  $('railHin').innerHTML=D.rail.hin.map(row).join('');
+  $('railRueck').innerHTML=D.rail.rueck.map(row).join('');
+  $('railLead').textContent=D.rail.note;
+  const r5=railCost(5,'2'), r6=railCost(6,'2');
+  const plain5=Math.min(...D.rail.hin.map(t=>t.k2['5']))+Math.min(...D.rail.rueck.map(t=>t.k2['5']));
+  $('railTip').innerHTML=`<b>Tipp Gruppen-Sparpreis:</b> Für 6 Personen kostet die Hin- und Rückfahrt zusammen <b>${eur2(r6.total)}</b> (${eur2(r6.total/6)} p. P.). `+
+   `Zu fünft kostet der normale Sparpreis mindestens ${eur2(plain5)}, ein 6er-Gruppenticket aber nur ${eur2(r5.total)}. `+
+   (r5.total<plain5?`Ein Gruppenticket für 6 ist also <b>${eur2(plain5-r5.total)} günstiger</b>, auch wenn nur 5 fahren. Vor der Buchung die DB-Bedingungen prüfen.`:'Zu fünft lohnt sich das Gruppenticket derzeit nicht.');
+}
+
+/* ---------- Verlauf ---------- */
+const SERIES=[
+  {k:'I2',label:'Innen 2er',color:'#0b5cad'},
+  {k:'I2AI',label:'Innen 2er AI',color:'#7a2e9e'},
+  {k:'I3',label:'Innen 3er',color:'#1d9bd6'},
+  {k:'B2',label:'Balkon 2er',color:'#127a3e'},
+  {k:'B2AI',label:'Balkon 2er AI',color:'#b54708'}
+];
+function renderHistory(){
+  const h=D.history;
+  $('histHead').innerHTML='<tr><th>Datum</th>'+SERIES.map(s=>`<th class="num">${s.label}</th>`).join('')+'<th class="num">Bahn 6er hin+rück</th></tr>';
+  $('histRows').innerHTML=h.slice().reverse().map((x,i,arr)=>{
+    const prev=arr[i+1];
+    const cell=k=>{const v=x[k]; let d=''; if(prev&&prev[k]!=null&&v!==prev[k]){const diff=v-prev[k]; d=` <span class="tag ${diff<0?'ok':'bad'}">${diff>0?'+':''}${eur(diff)}</span>`;} return `<td class="num">${eur(v)}${d}</td>`;};
+    return `<tr><td>${fmtDate(x.date)}</td>${SERIES.map(s=>cell(s.k)).join('')}<td class="num">${eur2((x.railHin6||0)+(x.railRueck6||0))}</td></tr>`;
+  }).join('');
+  const W=700,H=220,P={l:52,r:12,t:12,b:26};
+  const vals=h.flatMap(x=>SERIES.map(s=>x[s.k])).filter(v=>v!=null);
+  let lo=Math.min(...vals), hi=Math.max(...vals); const pad=(hi-lo)*0.1||200; lo-=pad; hi+=pad;
+  const xs=i=>P.l+(h.length<2?(W-P.l-P.r)/2:i*(W-P.l-P.r)/(h.length-1));
+  const ys=v=>P.t+(hi-v)*(H-P.t-P.b)/(hi-lo);
+  let g='';
+  for(let i=0;i<=4;i++){const v=lo+(hi-lo)*i/4; g+=`<line x1="${P.l}" x2="${W-P.r}" y1="${ys(v)}" y2="${ys(v)}" stroke="currentColor" opacity=".12"/><text x="${P.l-6}" y="${ys(v)+4}" font-size="11" text-anchor="end" fill="currentColor" opacity=".6">${Math.round(v)}</text>`;}
+  h.forEach((x,i)=>{ if(h.length<=8||i%Math.ceil(h.length/8)===0) g+=`<text x="${xs(i)}" y="${H-6}" font-size="11" text-anchor="middle" fill="currentColor" opacity=".6">${fmtDate(x.date).slice(0,6)}</text>`; });
+  for(const s of SERIES){
+    const pts=h.map((x,i)=>x[s.k]==null?null:[xs(i),ys(x[s.k])]).filter(Boolean);
+    if(pts.length>1) g+=`<polyline fill="none" stroke="${s.color}" stroke-width="2.2" points="${pts.map(p=>p.join(',')).join(' ')}"/>`;
+    pts.forEach(p=>g+=`<circle cx="${p[0]}" cy="${p[1]}" r="3.5" fill="${s.color}"/>`);
+  }
+  $('chart').innerHTML=`<svg viewBox="0 0 ${W} ${H}" style="color:var(--ink)" role="img" aria-label="Preisverlauf Kabinenpreise">${g}</svg>`+(h.length<2?'<p class="small muted" style="margin:6px 0 0">Erst eine Messung – die Linie entsteht ab morgen.</p>':'');
+  $('legend').innerHTML=SERIES.map(s=>`<span><i style="background:${s.color}"></i>${s.label}</span>`).join('');
+}
+function renderAlerts(){
+  const a=(D.alerts||[]).slice(-3).reverse();
+  $('alerts').innerHTML=a.map(x=>`<div class="note ${x.type==='down'?'good':'warn'}"><b>${fmtDate(x.date)}:</b> ${x.text}</div>`).join('');
+}
+</script>
+</body>
+</html>
