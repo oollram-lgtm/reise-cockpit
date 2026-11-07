@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-07T15:31:30+01:00",
+  "updated": "2026-11-07T16:34:49+01:00",
   "cruise": {
     "id": "NO07270424",
     "title": "Skandinavische Highlights ab Hamburg",
@@ -144,7 +144,7 @@
   "rail": {
     "from": "Hanau Hbf",
     "to": "Hamburg Hbf",
-    "note": "Sparpreise ohne BahnCard, Preis für die ganze Gruppe. Ab 6 Personen gilt automatisch der Gruppen-Sparpreis.",
+    "note": "Sparpreise ohne BahnCard, Preis für die ganze Gruppe. Ab 6 Personen gilt automatisch der Gruppen-Sparpreis. Bahnpreise werden von Hand geprüft (bahn.de sperrt automatische Abfragen).",
     "hin": [
       {
         "ab": "06:15",
@@ -290,7 +290,8 @@
       "rueckEarliestDeparture": "11:00",
       "maxMinutes": 285,
       "maxTransfers": 1
-    }
+    },
+    "checked": "2026-11-07"
   },
   "history": [
     {

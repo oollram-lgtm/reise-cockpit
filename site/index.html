@@ -201,7 +201,7 @@ footer{padding:28px 0 40px;color:var(--muted);font-size:13px}
 
 <section id="verlauf">
   <h2>Preisverlauf</h2>
-  <p class="lead">Ein Agent prüft täglich AIDA und die Bahn. Jeder Punkt ist eine Messung.</p>
+  <p class="lead">Ein Agent prüft jeden Morgen die AIDA-Preise. Jeder Punkt ist eine Messung.</p>
   <div class="card"><div id="chart"></div><div class="legend" id="legend"></div></div>
   <div class="tablewrap" style="margin-top:12px"><table><thead id="histHead"></thead><tbody id="histRows"></tbody></table></div>
 </section>
@@ -213,7 +213,7 @@ footer{padding:28px 0 40px;color:var(--muted);font-size:13px}
     <li><b>bis 30.11.2026</b><span>Klären, ob wir 5 oder 6 sind. Wer schläft mit wem? Wer will All Inclusive?</span></li>
     <li><b>sofort danach</b><span>Kreuzfahrt buchen, solange <i>Frühbucher Plus</i> (300 € pro Kabine) gilt. Die günstigen Kabinen in den beliebten 3er/4er-Belegungen sind zuerst weg. Tarif PREMIUM ist flexibel (Umbuchung möglich) – fällt der Preis später, kann man nachfragen.</span></li>
     <li><b>parallel</b><span>Bahn bereits jetzt buchbar (Vorverkauf 12 Monate). Sparpreise steigen meist, je näher der Termin rückt. Gruppen-Sparpreis für 6 Personen + Sitzplätze buchen.</span></li>
-    <li><b>bis Abreise</b><span>Agent beobachtet weiter: neue günstigere Tarife (LIGHT/CLASSIC), Aktionen, Preissenkungen. Bei einer Senkung bei AIDA anfragen.</span></li>
+    <li><b>bis Abreise</b><span>Agent beobachtet täglich die AIDA-Preise: neue günstigere Tarife (LIGHT/CLASSIC) und Preissenkungen. Bei einer Senkung bei AIDA anfragen.</span></li>
   </ul></div>
   <div class="note warn">Die günstigsten Tarife (LIGHT, CLASSIC) sind für diese Reise derzeit <b>nicht verfügbar</b>. Der Agent meldet, falls sie auftauchen.</div>
   <p style="margin-top:16px"><a class="btn wa" id="waBtn" target="_blank" rel="noopener">In WhatsApp teilen</a> <a class="btn sec" id="aidaBtn" target="_blank" rel="noopener">Reise bei AIDA ansehen</a></p>
@@ -406,7 +406,7 @@ function renderRail(){
   $('railRueck').innerHTML=D.rail.rueck.map(row('rueck')).join('');
   const R=rules();
   $('railRules').innerHTML=`<b>Unsere Zeitregeln:</b> Check-in ab ${R.checkin||'15:00'} Uhr, Abfahrt Schiff ${D.cruise.departure.split(', ')[1]} → Ankunft Hamburg Hbf <b>spätestens ${R.hinLatestArrival} Uhr</b> (30–45 Min. Transfer zum Terminal + Puffer für Verspätungen). Rückkehr: Schiff legt ${D.cruise.arrival.split(', ')[1]} an → Zug ab Hamburg <b>frühestens ${R.rueckEarliestDeparture} Uhr</b>. Fahrzeit max. ${fmtDur(R.maxMinutes)}, max. ${R.maxTransfers} Umstieg. Nicht passende Züge sind ausgegraut und werden nicht berechnet.`;
-  $('railLead').textContent=D.rail.note;
+  $('railLead').innerHTML=D.rail.note+(D.rail.checked?` <b>Stand: ${fmtDate(D.rail.checked)}.</b>`:'');
   const r5=railCost(5,'2'), r6=railCost(6,'2');
   const m5=(l,d)=>Math.min(...l.filter(t=>railOk(t,d).ok&&t.k2['5']!=null).map(t=>t.k2['5']));
   const plain5=m5(D.rail.hin,'hin')+m5(D.rail.rueck,'rueck');
