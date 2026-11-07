@@ -162,8 +162,9 @@ footer{padding:28px 0 40px;color:var(--muted);font-size:13px}
     <div class="card"><h3 style="margin:0 0 8px;font-size:16px">Hinfahrt Sa 24.04.2027</h3><div class="tablewrap" style="border:0"><table><thead><tr><th>Zug</th><th class="num">5 Pers.</th><th class="num">6 Pers.</th></tr></thead><tbody id="railHin"></tbody></table></div></div>
     <div class="card"><h3 style="margin:0 0 8px;font-size:16px">Rückfahrt Sa 01.05.2027</h3><div class="tablewrap" style="border:0"><table><thead><tr><th>Zug</th><th class="num">5 Pers.</th><th class="num">6 Pers.</th></tr></thead><tbody id="railRueck"></tbody></table></div></div>
   </div>
+  <div class="note" id="railRules"></div>
   <div class="note good" id="railTip"></div>
-  <p class="small muted">Preise 2. Klasse, ganze Gruppe, ohne BahnCard. Einstieg spätestens ca. 3 Stunden vor Abfahrt (17:00) einplanen: Ankunft Hamburg vor 12 Uhr ist ideal. Rückfahrt: Ausschiffung ab ca. 8 Uhr, daher Züge ab 10 Uhr. Der 01.05. ist Feiertag, Züge sind voll – Sitzplätze reservieren!</p>
+  <p class="small muted">Preise 2. Klasse, ganze Gruppe, ohne BahnCard. Der 01.05. ist Feiertag, Züge sind voll – Sitzplätze reservieren!</p>
 </section>
 
 <section id="verlauf">
@@ -221,6 +222,18 @@ function init(){
 function seg(id,key,cast){ $(id).addEventListener('click',e=>{const b=e.target.closest('button'); if(!b)return; [...$(id).children].forEach(x=>x.classList.toggle('on',x===b)); state[key]=cast(b.dataset.v); render();}); }
 
 /* ---------- Bahn ---------- */
+const mins = s => { const [h,m]=s.split(':').map(Number); return h*60+m; };
+const fmtDur = m => `${Math.floor(m/60)}:${String(m%60).padStart(2,'0')} h`;
+function rules(){ return Object.assign({hinLatestArrival:'12:30', rueckEarliestDeparture:'11:00', maxMinutes:285, maxTransfers:1}, D.rail.rules||{}); }
+function railOk(t, dir){
+  const R=rules(); const why=[];
+  const dauer=t.dauer ?? (mins(t.an)-mins(t.ab));
+  if(dir==='hin' && mins(t.an)>mins(R.hinLatestArrival)) why.push('kommt zu spät an');
+  if(dir==='rueck' && mins(t.ab)<mins(R.rueckEarliestDeparture)) why.push('zu knapp nach Ausschiffung');
+  if(dauer>R.maxMinutes) why.push('zu lange Fahrt');
+  if(t.umst!=null && t.umst>R.maxTransfers) why.push(`${t.umst}× umsteigen`);
+  return {ok:!why.length, why, dauer};
+}
 function railCost(n, kl){
   if(kl==='0') return {total:0, txt:'ohne Bahn'};
   const key='k'+kl;
@@ -235,7 +248,8 @@ function railCost(n, kl){
     }
     return o;
   };
-  const h=best(D.rail.hin), r=best(D.rail.rueck);
+  const h=best(D.rail.hin.filter(t=>railOk(t,'hin').ok)), r=best(D.rail.rueck.filter(t=>railOk(t,'rueck').ok));
+  if(!h||!r) return {total:0, txt:'keine passende Verbindung in den Daten'};
   return {total:h.price+r.price, h, r, txt:`Hin ${h.t.ab} (${eur2(h.price)}${h.how.startsWith('Gruppen')?', als 6er-Gruppe':''}), Rück ${r.t.ab} (${eur2(r.price)}${r.how.startsWith('Gruppen')?', als 6er-Gruppe':''})`};
 }
 
@@ -349,12 +363,16 @@ function renderCabins(){
 
 /* ---------- Bahn ---------- */
 function renderRail(){
-  const row=t=>`<tr><td><b>${t.ab}</b> → ${t.an}<br><span class="small muted">${t.zug}</span></td><td class="num">${eur2(t.k2['5'])}</td><td class="num">${eur2(t.k2['6'])}<br><span class="small muted">${eur2(t.k2['6']/6)} p. P.</span></td></tr>`;
-  $('railHin').innerHTML=D.rail.hin.map(row).join('');
-  $('railRueck').innerHTML=D.rail.rueck.map(row).join('');
+  const row=dir=>t=>{const c=railOk(t,dir); const p5=t.k2['5'], p6=t.k2['6'];
+    return `<tr style="${c.ok?'':'opacity:.5'}"><td><b>${t.ab}</b> → ${t.an} <span class="small muted">(${fmtDur(c.dauer)}${t.umst!=null?`, ${t.umst}× umst.`:''})</span><br><span class="small muted">${t.zug}</span><br>${c.ok?'<span class="tag ok">passt</span>':c.why.map(w=>`<span class="tag bad">${w}</span>`).join(' ')}</td><td class="num">${eur2(p5)}</td><td class="num">${eur2(p6)}${p6!=null?`<br><span class="small muted">${eur2(p6/6)} p. P.</span>`:''}</td></tr>`;};
+  $('railHin').innerHTML=D.rail.hin.map(row('hin')).join('');
+  $('railRueck').innerHTML=D.rail.rueck.map(row('rueck')).join('');
+  const R=rules();
+  $('railRules').innerHTML=`<b>Unsere Zeitregeln:</b> Check-in ab ${R.checkin||'15:00'} Uhr, Abfahrt Schiff ${D.cruise.departure.split(', ')[1]} → Ankunft Hamburg Hbf <b>spätestens ${R.hinLatestArrival} Uhr</b> (30–45 Min. Transfer zum Terminal + Puffer für Verspätungen). Rückkehr: Schiff legt ${D.cruise.arrival.split(', ')[1]} an → Zug ab Hamburg <b>frühestens ${R.rueckEarliestDeparture} Uhr</b>. Fahrzeit max. ${fmtDur(R.maxMinutes)}, max. ${R.maxTransfers} Umstieg. Nicht passende Züge sind ausgegraut und werden nicht berechnet.`;
   $('railLead').textContent=D.rail.note;
   const r5=railCost(5,'2'), r6=railCost(6,'2');
-  const plain5=Math.min(...D.rail.hin.map(t=>t.k2['5']))+Math.min(...D.rail.rueck.map(t=>t.k2['5']));
+  const m5=(l,d)=>Math.min(...l.filter(t=>railOk(t,d).ok&&t.k2['5']!=null).map(t=>t.k2['5']));
+  const plain5=m5(D.rail.hin,'hin')+m5(D.rail.rueck,'rueck');
   $('railTip').innerHTML=`<b>Tipp Gruppen-Sparpreis:</b> Für 6 Personen kostet die Hin- und Rückfahrt zusammen <b>${eur2(r6.total)}</b> (${eur2(r6.total/6)} p. P.). `+
    `Zu fünft kostet der normale Sparpreis mindestens ${eur2(plain5)}, ein 6er-Gruppenticket aber nur ${eur2(r5.total)}. `+
    (r5.total<plain5?`Ein Gruppenticket für 6 ist also <b>${eur2(plain5-r5.total)} günstiger</b>, auch wenn nur 5 fahren. Vor der Buchung die DB-Bedingungen prüfen.`:'Zu fünft lohnt sich das Gruppenticket derzeit nicht.');

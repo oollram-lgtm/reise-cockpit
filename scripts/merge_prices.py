@@ -55,7 +55,10 @@ def main(snapshot_path):
     if snap.get("rail"):
         for direction in ("hin", "rueck"):
             new = snap["rail"].get(direction)
-            if not new:
+            # nur vollständige Daten übernehmen (Gruppenpreise 5 und 6 Pers., 2. Klasse)
+            if not new or not all(t.get("k2", {}).get("6") is not None and t.get("k2", {}).get("5") is not None for t in new):
+                if new:
+                    print(f"WARN: Bahn {direction} unvollständig – alte Werte bleiben")
                 continue
             prev6 = cheapest(data["rail"][direction], "k2", "6")
             now6 = cheapest(new, "k2", "6")

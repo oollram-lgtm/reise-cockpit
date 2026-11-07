@@ -32,15 +32,18 @@ JSON.stringify(out)
 
 ## 2. Bahnpreise (im eingebauten Browser)
 1. `https://www.bahn.de/buchung/start` öffnen.
-2. Im Seitenkontext ausführen (Abfrage Hin 24.04. ab 06:00, Rück 01.05. ab 09:30; 5 und 6 Personen, 1./2. Klasse):
+2. Im Seitenkontext ausführen. Zeitregeln der Gruppe (Check-in 15 Uhr): Hinfahrt mit **Ankunft Hamburg Hbf spätestens 12:30** (Suche nach Ankunftszeit), Rückfahrt **ab 11:00** (Schiff legt 08:00 an). Nur 2 Personengruppen (5, 6) × 2 Klassen, mit 2 s Pause zwischen den Abfragen – bei zu vielen Abfragen sperrt bahn.de mit `OPS_BLOCKED` (403). Dann abbrechen, Bahn-Teil weglassen, nicht wiederholen.
 ```js
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const g=async s=>(await (await fetch('/web/api/reiseloesung/orte?suchbegriff='+encodeURIComponent(s)+'&typ=ALL&limit=1')).json())[0].id;
 const H=await g('Hanau Hbf'), HH=await g('Hamburg Hbf');
-async function q(from,to,t,n,kl){const body={abfahrtsHalt:from,anfrageZeitpunkt:t,ankunftsHalt:to,ankunftSuche:'ABFAHRT',klasse:kl,produktgattungen:['ICE','EC_IC','IR','REGIONAL','SBAHN','BUS','SCHIFF','UBAHN','TRAM','ANRUFPFLICHTIG'],reisende:[{typ:'ERWACHSENER',ermaessigungen:[{art:'KEINE_ERMAESSIGUNG',klasse:'KLASSENLOS'}],alter:[],anzahl:n}],schnelleVerbindungen:true,sitzplatzOnly:false,bikeCarriage:false,reservierungsKontingenteVorhanden:false,nurDeutschlandTicketVerbindungen:false,deutschlandTicketVorhanden:false};
- const j=await (await fetch('/web/api/angebote/fahrplan',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(body)})).json();
- return (j.verbindungen||[]).map(v=>{const a=v.verbindungsAbschnitte;const z=a.filter(x=>x.verkehrsmittel&&x.verkehrsmittel.typ!=='WALK').map(x=>x.verkehrsmittel.name);return {ab:(a[0].abfahrt?.sollzeit||'').slice(11,16),an:(a[a.length-1].ankunft?.sollzeit||'').slice(11,16),zug:z.join(' → '),p:v.angebotsPreis?.betrag};});}
-async function dir(from,to,t){const rows={};for(const [n,kl] of [[1,'KLASSE_2'],[5,'KLASSE_2'],[6,'KLASSE_2'],[5,'KLASSE_1'],[6,'KLASSE_1']]){for(const v of await q(from,to,t,n,kl)){const r=rows[v.ab]??={ab:v.ab,an:v.an,zug:v.zug,k2:{},k1:{}};r[kl==='KLASSE_2'?'k2':'k1'][n]=v.p;}}return Object.values(rows).sort((a,b)=>a.ab.localeCompare(b.ab));}
-JSON.stringify({rail:{hin:await dir(H,HH,'2027-04-24T06:00:00'),rueck:await dir(HH,H,'2027-05-01T09:30:00')}})
+async function q(from,to,t,n,kl,mode){await sleep(2000);const body={abfahrtsHalt:from,anfrageZeitpunkt:t,ankunftsHalt:to,ankunftSuche:mode,klasse:kl,produktgattungen:['ICE','EC_IC','IR','REGIONAL','SBAHN','BUS','SCHIFF','UBAHN','TRAM','ANRUFPFLICHTIG'],reisende:[{typ:'ERWACHSENER',ermaessigungen:[{art:'KEINE_ERMAESSIGUNG',klasse:'KLASSENLOS'}],alter:[],anzahl:n}],schnelleVerbindungen:true,sitzplatzOnly:false,bikeCarriage:false,reservierungsKontingenteVorhanden:false,nurDeutschlandTicketVerbindungen:false,deutschlandTicketVorhanden:false};
+ const r=await fetch('/web/api/angebote/fahrplan',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(body)});
+ if(!r.ok) throw new Error('bahn.de '+r.status+' '+(await r.text()).slice(0,120));
+ const j=await r.json();
+ return (j.verbindungen||[]).map(v=>{const a=v.verbindungsAbschnitte;const z=a.filter(x=>x.verkehrsmittel&&x.verkehrsmittel.typ!=='WALK').map(x=>x.verkehrsmittel.name);return {ab:(a[0].abfahrt?.sollzeit||'').slice(11,16),an:(a[a.length-1].ankunft?.sollzeit||'').slice(11,16),dauer:Math.round(v.verbindungsDauerInSeconds/60),umst:v.umstiegsAnzahl,zug:z.join(' → '),p:v.angebotsPreis?.betrag};});}
+async function dir(from,to,t,mode){const rows={};for(const [n,kl] of [[6,'KLASSE_2'],[5,'KLASSE_2'],[6,'KLASSE_1'],[5,'KLASSE_1']]){for(const v of await q(from,to,t,n,kl,mode)){const r=rows[v.ab]??={ab:v.ab,an:v.an,dauer:v.dauer,umst:v.umst,zug:v.zug,k2:{},k1:{}};r[kl==='KLASSE_2'?'k2':'k1'][n]=v.p;}}return Object.values(rows).sort((a,b)=>a.ab.localeCompare(b.ab));}
+JSON.stringify({rail:{hin:await dir(H,HH,'2027-04-24T12:30:00','ANKUNFT'),rueck:await dir(HH,H,'2027-05-01T11:00:00','ABFAHRT')}})
 ```
 
 ## 3. Zusammenführen und veröffentlichen
