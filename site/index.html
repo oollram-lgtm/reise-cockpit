@@ -3,57 +3,67 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Skandinavien-Kreuzfahrt 2027</title>
-<meta name="description" content="Preise, Kabinen-Konstellationen und Bahnanreise für unsere AIDAnova-Reise 24.04.–01.05.2027">
+<title>Allinclusive Männer – Kreuzfahrt 2027</title>
+<meta name="description" content="Preise, Kabinen-Varianten und Bahnanreise für unsere AIDAnova-Reise 24.04.–01.05.2027">
 <meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0a1422">
+<meta property="og:title" content="Allinclusive Männer – Kreuzfahrt 2027">
+<meta property="og:description" content="AIDAnova Skandinavien 24.04.–01.05.2027: aktuelle Preise, Kabinen-Varianten & Bahn ab Hanau">
+<meta property="og:image" content="https://reise.bigbanker.de/img/og.jpg">
+<meta property="og:url" content="https://reise.bigbanker.de/">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/icon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* Farben aus dem Gruppenlogo: Nachtblau, Sonnenuntergang, Meerblau */
 :root{
-  --bg:#f6f8fb; --card:#ffffff; --ink:#101828; --muted:#475467; --line:#e4e7ec;
-  --accent:#0b5cad; --accent-soft:#e7f0fb; --good:#127a3e; --good-soft:#e5f5ec;
-  --warn:#b54708; --warn-soft:#fef0e1; --bad:#b42318; --bad-soft:#fdeceb; --ai:#7a2e9e; --ai-soft:#f4eafa;
+  --bg:#0a1422; --card:#111e31; --card2:#16273f; --ink:#f3f6fa; --muted:#a3b2c6; --line:#22354f;
+  --accent:#2f9ff0; --accent-soft:#12304d; --sun:#ff8a1f; --sun2:#ffb347; --sun-soft:#3a2410;
+  --good:#4fd18b; --good-soft:#123222; --warn:#ffd166; --warn-soft:#38300f;
+  --bad:#f47b70; --bad-soft:#3a1714; --ai:#ffb347; --ai-soft:#3d2a12;
   --radius:14px;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#0e141c; --card:#16202b; --ink:#eef2f6; --muted:#a7b3c2; --line:#26323f;
-    --accent:#6aa9ec; --accent-soft:#132a42; --good:#4fd18b; --good-soft:#123222; --warn:#f5a85b; --warn-soft:#3a2614;
-    --bad:#f47b70; --bad-soft:#3a1714; --ai:#d19af0; --ai-soft:#2c1838;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#0e141c; --card:#16202b; --ink:#eef2f6; --muted:#a7b3c2; --line:#26323f;
-  --accent:#6aa9ec; --accent-soft:#132a42; --good:#4fd18b; --good-soft:#123222; --warn:#f5a85b; --warn-soft:#3a2614;
-  --bad:#f47b70; --bad-soft:#3a1714; --ai:#d19af0; --ai-soft:#2c1838;
+  --display:Anton,Impact,'Arial Narrow',sans-serif;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
 a{color:var(--accent)}
 .wrap{max-width:1100px;margin:0 auto;padding:0 16px}
-header.hero{background:linear-gradient(135deg,#0b3d75,#0b5cad 60%,#1d7fd6);color:#fff;padding:28px 0 22px}
-.hero h1{margin:0 0 6px;font-size:clamp(22px,4vw,32px);line-height:1.2}
-.hero .sub{opacity:.9}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.chip{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:4px 10px;border-radius:999px;font-size:13px}
-.route{margin-top:12px;font-size:13px;opacity:.9}
-nav.tabs{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line)}
+header.hero{position:relative;overflow:hidden;color:#fff;padding:26px 0 22px;
+  background:
+    radial-gradient(circle at 78% 18%, rgba(255,214,140,.55) 0 60px, transparent 61px),
+    linear-gradient(180deg,#ff7a18 0%,#ff9a3c 38%,#c4521b 62%,#0f2c4f 63%,#0a1a30 100%)}
+header.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:6px;background:repeating-linear-gradient(90deg,#2f9ff0 0 24px,#1b6fb0 24px 48px)}
+.hero-in{display:flex;gap:20px;align-items:center}
+.hero-logo{width:132px;height:132px;border-radius:50%;flex:none;box-shadow:0 6px 24px rgba(0,0,0,.45);border:3px solid rgba(255,255,255,.85);background:#000}
+.hero .kicker{font-family:var(--display);letter-spacing:.06em;font-size:14px;color:#fff;opacity:.9;text-transform:uppercase}
+.hero h1{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(34px,7vw,58px);line-height:.95;letter-spacing:.01em;text-transform:uppercase;text-shadow:0 3px 0 rgba(0,0,0,.35)}
+.hero h1 em{display:block;font-style:italic;color:#3db0ff;-webkit-text-stroke:1px #0a1a30;transform:skew(-6deg);text-shadow:0 3px 0 rgba(0,0,0,.4)}
+.hero .sub{margin-top:8px;font-weight:600;text-shadow:0 1px 2px rgba(0,0,0,.4)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{background:rgba(10,20,34,.55);border:1px solid rgba(255,255,255,.25);padding:4px 10px;border-radius:999px;font-size:13px;backdrop-filter:blur(2px)}
+.route{margin-top:10px;font-size:13px;opacity:.9}
+@media (max-width:600px){.hero-in{flex-direction:column;text-align:center}.hero-logo{width:112px;height:112px}.chips{justify-content:center}}
+nav.tabs{position:sticky;top:0;z-index:5;background:rgba(10,20,34,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
 nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
-nav.tabs a{padding:12px 12px;white-space:nowrap;text-decoration:none;color:var(--muted);font-weight:500;border-bottom:2px solid transparent}
-nav.tabs a:hover{color:var(--ink)}
+nav.tabs a{padding:12px 12px;white-space:nowrap;text-decoration:none;color:var(--muted);font-weight:600;border-bottom:3px solid transparent;text-transform:uppercase;font-size:13px;letter-spacing:.04em}
+nav.tabs a:hover{color:var(--sun2);border-bottom-color:var(--sun)}
 section{padding:22px 0 6px}
-h2{font-size:20px;margin:0 0 4px}
+h2{font-family:var(--display);font-weight:400;font-size:28px;letter-spacing:.02em;text-transform:uppercase;margin:0 0 4px}
+h2::after{content:"";display:block;width:56px;height:4px;border-radius:2px;background:linear-gradient(90deg,var(--sun),var(--accent));margin-top:4px}
 .lead{color:var(--muted);margin:0 0 14px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
 .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
 .reco{position:relative}
-.reco .rank{font-size:12px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.04em}
-.reco .big{font-size:26px;font-weight:700;margin:4px 0 0}
+.reco .rank{font-size:12px;font-weight:700;color:var(--sun2);text-transform:uppercase;letter-spacing:.04em}
+.reco .big{font-family:var(--display);font-weight:400;font-size:34px;margin:4px 0 0;letter-spacing:.01em}
+.reco:first-child{border-color:var(--sun);box-shadow:0 0 0 1px var(--sun) inset}
 .reco .pp{color:var(--muted)}
 .reco ul{margin:10px 0 0;padding-left:18px}
 .tag{display:inline-block;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px;vertical-align:middle}
-.tag.ai{background:var(--ai-soft);color:var(--ai)}
+.tag.ai{background:var(--sun);color:#1a0d00}
 .tag.ok{background:var(--good-soft);color:var(--good)}
 .tag.warn{background:var(--warn-soft);color:var(--warn)}
 .tag.bad{background:var(--bad-soft);color:var(--bad)}
@@ -62,14 +72,14 @@ h2{font-size:20px;margin:0 0 4px}
 .controls label{font-size:13px;color:var(--muted);display:block;margin-bottom:4px;font-weight:500}
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
 .seg button{border:0;background:transparent;color:var(--ink);padding:7px 14px;font:inherit;cursor:pointer}
-.seg button.on{background:var(--accent);color:#fff}
+.seg button.on{background:var(--sun);color:#1a0d00;font-weight:700}
 .checks{display:flex;flex-wrap:wrap;gap:6px}
 .checks label{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:4px 10px;margin:0;color:var(--ink);font-size:13px;cursor:pointer}
 select,input[type=number]{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:6px 8px;width:100%}
 .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--card)}
 table{border-collapse:collapse;width:100%;font-size:14px}
 th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
-th{font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);font-weight:600;background:var(--bg);position:sticky;top:0}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);font-weight:600;background:var(--card2);position:sticky;top:0}
 td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 tr:last-child td{border-bottom:0}
 tbody tr:hover{background:var(--accent-soft)}
@@ -82,7 +92,7 @@ tbody tr:hover{background:var(--accent-soft)}
 .timeline{list-style:none;padding:0;margin:0}
 .timeline li{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
 .timeline li:last-child{border:0}
-.timeline b{color:var(--accent)}
+.timeline b{color:var(--sun2)}
 .btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:10px;padding:10px 14px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none}
 .btn.wa{background:#1f9d55;color:#fff}
 .btn.sec{background:var(--accent-soft);color:var(--accent)}
@@ -95,11 +105,16 @@ footer{padding:28px 0 40px;color:var(--muted);font-size:13px}
 </head>
 <body>
 <header class="hero">
-  <div class="wrap">
-    <h1 id="title">Skandinavische Highlights ab Hamburg</h1>
-    <div class="sub" id="sub">AIDAnova · 24.04. – 01.05.2027 · 7 Nächte</div>
+  <div class="wrap hero-in">
+    <img class="hero-logo" src="img/logo.webp" alt="Logo Allinclusive Männer" width="132" height="132">
+    <div>
+    <div class="kicker">Männer · Allinclusive · Keine Ausreden</div>
+    <h1>Allinclusive <em>Männer</em></h1>
+    <div class="sub" id="title">Skandinavische Highlights ab Hamburg</div>
+    <div class="small" id="sub" style="opacity:.9">AIDAnova · 24.04. – 01.05.2027 · 7 Nächte</div>
     <div class="chips" id="chips"></div>
     <div class="route" id="route"></div>
+    </div>
   </div>
 </header>
 
@@ -380,11 +395,11 @@ function renderRail(){
 
 /* ---------- Verlauf ---------- */
 const SERIES=[
-  {k:'I2',label:'Innen 2er',color:'#0b5cad'},
-  {k:'I2AI',label:'Innen 2er AI',color:'#7a2e9e'},
-  {k:'I3',label:'Innen 3er',color:'#1d9bd6'},
-  {k:'B2',label:'Balkon 2er',color:'#127a3e'},
-  {k:'B2AI',label:'Balkon 2er AI',color:'#b54708'}
+  {k:'I2',label:'Innen 2er',color:'#2f9ff0'},
+  {k:'I2AI',label:'Innen 2er AI',color:'#ff8a1f'},
+  {k:'I3',label:'Innen 3er',color:'#8fd3ff'},
+  {k:'B2',label:'Balkon 2er',color:'#4fd18b'},
+  {k:'B2AI',label:'Balkon 2er AI',color:'#ffd166'}
 ];
 function renderHistory(){
   const h=D.history;
