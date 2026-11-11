@@ -167,7 +167,7 @@ footer{padding:28px 0 40px;color:var(--muted);font-size:13px}
     <div><label>Bahn</label><div class="seg" id="segRail"><button data-v="2" class="on">2. Kl.</button><button data-v="1">1. Kl.</button><button data-v="0">ohne</button></div></div>
     <div><label>Max. Personen pro Kabine</label><div class="seg" id="segMax"><button data-v="2">2</button><button data-v="3">3</button><button data-v="4" class="on">4</button></div></div>
     <div style="grid-column:1/-1"><label>Kabinenkategorien</label><div class="checks" id="cats"></div></div>
-    <div><label><input type="checkbox" id="singles"> Einzelkabinen erlauben</label></div>
+    <div><label><input type="checkbox" id="singles" checked> Einzelkabinen erlauben</label></div>
     <div><label><input type="checkbox" id="mix" checked> Kategorien mischen erlauben</label></div>
     <div><label for="budget">Budget p. P. (€)</label><input type="number" id="budget" value="1200" step="50"></div>
   </div>
@@ -231,7 +231,7 @@ const eur = v => v==null ? '–' : v.toLocaleString('de-DE',{style:'currency',cu
 const eur2 = v => v==null ? '–' : v.toLocaleString('de-DE',{style:'currency',currency:'EUR',minimumFractionDigits:2});
 const fmtDate = s => new Date(s).toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit',year:'numeric'});
 const $ = id => document.getElementById(id);
-let D, shown=10, state = {n:6, ai:0.5, rail:'2', max:4, singles:false, mix:true, budget:1200, cats:new Set(['I','M','B'])};
+let D, shown=10, state = {n:6, ai:0.5, rail:'2', max:4, singles:true, mix:true, budget:1200, cats:new Set(['I','M','B'])};
 
 fetch('data/prices.json?'+Date.now()).then(r=>r.json()).then(d=>{D=d; init();}).catch(e=>{console.error(e);document.querySelector('main').insertAdjacentHTML('afterbegin','<p class="note warn">Preisdaten konnten nicht geladen werden.</p>')});
 
@@ -412,7 +412,7 @@ function renderCabins(){
             <tr><td><b>${k.name}</b><br><span class="tag ai">All Inclusive</span></td>${[1,2,3,4].map(n=>cell(true,n)).join('')}</tr>`;
   }).join('');
   const t=D.tariffs; const off=Object.entries(t).filter(([k,v])=>!v).map(([k])=>k);
-  $('bedNote').innerHTML=`<b>Keine Pullman-Betten:</b> Ein Pullman-Bett ist ein Klappbett, das an der Wand bzw. Decke hängt. Wir rechnen nur mit Kabinen, in denen die 3. und 4. Person auf einer Bettcouch schläft: <b>Innenkabine zu dritt nur Kategorie IA</b> (Bevorzugte Lage, ${eur(cabinPrice(D.cabins.find(c=>c.code==='I'),3,false))} statt ${eur(D.cabins.find(c=>c.code==='I').prem[3])} für IB), <b>Innen und Meerblick nicht zu viert</b>. Balkon, Veranda und Suiten haben nur Bettcouches – dort passt jede Belegung.`;
+  $('bedNote').innerHTML=`<b>Keine Pullman-Betten:</b> Ein Pullman-Bett ist ein Klappbett, das an der Wand bzw. Decke hängt. Wir rechnen nur mit Kabinen, in denen die 3. und 4. Person auf einer Bettcouch schläft: <b>Innenkabine zu dritt nur Kategorie IA</b> (Bevorzugte Lage, ${eur(cabinPrice(D.cabins.find(c=>c.code==='I'),3,false))} statt ${eur(D.cabins.find(c=>c.code==='I').prem[3])} für IB), <b>Innen und Meerblick nicht zu viert</b>. Balkon, Veranda und Suiten haben nur Bettcouches – dort passt jede Belegung. <b>Ausnahme Einzelkabinen:</b> Für eine Person gibt es keine Alternative, deshalb sind Einzelkabinen immer erlaubt, auch wenn dort ein Pullman-Bett verbaut ist.`;
   $('tariffNote').innerHTML=`All Inclusive kostet hier rund <b>230 € pro Person</b> mehr (Getränke-Paket, WLAN u. a.). ${D.cruise.earlyBird}.` + (off.length?` Derzeit nicht buchbar: ${off.join(', ')}.`:'');
 }
 
