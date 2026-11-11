@@ -30,6 +30,17 @@ out.cabins=Object.values(per);
 JSON.stringify(out)
 ```
 
+## 1b. Innenkabine zu dritt: Kategorie IA (ohne Pullman-Bett)
+Die Gruppe will **keine Pullman-Betten**. Bei 3 Personen in der Innenkabine hat nur **IA (Bevorzugte Lage)** eine Bettcouch
+statt Pullman (IB/IC: Pullman). Innen und Meerblick zu viert gehen gar nicht (4. Bett = Pullman) – dafür nichts abrufen.
+Der IA-Preis steht nicht im JSON oben, sondern nur im Buchungsablauf (nichts buchen, keine Daten eingeben):
+1. `https://aida.de/buchen/NO07270424/PREMIUM/meine-reise/reisende?adults=3&juveniles=0&children=0&babies=0&cabin=I` öffnen, ca. 5 s warten.
+2. Element „PREMIUM auswählen“ anklicken (find), ca. 3 s warten.
+3. Für PREMIUM: „Ich möchte ohne “PREMIUM ALL IN” fortfahren“ anklicken → Seitentext lesen: Zeile „Bevorzugte Lage (IA) … ab X €“ = `prem`.
+4. Schritte 1–2 wiederholen, dann „“PREMIUM ALL IN” auswählen“ anklicken → „Bevorzugte Lage (IA) … ab Y €“ = `ai`.
+5. Im Snapshot ergänzen: `"beds": {"I": {"3": {"sub": "IA", "prem": X, "ai": Y}}}`.
+   Steht bei IA „Nicht verfügbar“: `beds` weglassen und Oliver per Push informieren („IA zu dritt nicht mehr verfügbar“).
+
 ## 2. Bahnpreise – NICHT automatisch
 bahn.de erkennt automatisierte Abfragen als Bot (Fehler 751 / `OPS_BLOCKED`) und sperrt dann auch die normale Seite.
 Bot-Erkennung wird nicht umgangen. Der Agent ruft bahn.de daher **nicht** auf.
@@ -38,7 +49,7 @@ dann `rail.hin`/`rail.rueck` und `rail.checked` in `site/data/prices.json` anpas
 Zeitregeln der Gruppe: Ankunft Hamburg Hbf bis 12:30, Rückfahrt ab 11:00, max. 4:45 h, max. 1 Umstieg.
 
 ## 3. Zusammenführen und veröffentlichen
-1. Das AIDA-Ergebnis als `snapshot.json` im Scratchpad speichern (`cabins`, `tariffs`).
+1. Das AIDA-Ergebnis als `snapshot.json` im Scratchpad speichern (`cabins`, `tariffs`, `beds`).
    Schlägt der Abruf fehl, nichts speichern und Oliver informieren – nie Werte erfinden.
 2. `python scripts/merge_prices.py <pfad>/snapshot.json`
 3. `git add site/data/prices.json && git commit -m "Preise <Datum>" && git push`

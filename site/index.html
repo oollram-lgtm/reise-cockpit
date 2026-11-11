@@ -184,6 +184,7 @@ footer{padding:28px 0 40px;color:var(--muted);font-size:13px}
     <thead><tr><th>Kategorie</th><th class="num">1 Pers.</th><th class="num">2 Pers.</th><th class="num">3 Pers.</th><th class="num">4 Pers.</th></tr></thead>
     <tbody id="cabinRows"></tbody>
   </table></div>
+  <div class="note good" id="bedNote"></div>
   <div class="note" id="tariffNote"></div>
 </section>
 
@@ -285,6 +286,17 @@ function railCost(n, kl){
   return {total:h.price+r.price, h, r, txt:`Hin ${h.t.ab} (${eur2(h.price)}${h.how.startsWith('Gruppen')?', als 6er-Gruppe':''}), Rück ${r.t.ab} (${eur2(r.price)}${r.how.startsWith('Gruppen')?', als 6er-Gruppe':''})`};
 }
 
+/* ---------- Preise ohne Pullman-Betten ---------- */
+// null = Belegung nicht möglich ohne Pullman; Objekt = Pflicht-Unterkategorie mit eigenem Preis
+function bedRule(code, occ){ const b=(D.beds||{})[code]; return b && (String(occ) in b) ? b[occ] : undefined; }
+function cabinPrice(k, occ, ai){
+  const r=bedRule(k.code, occ);
+  if(r===null) return null;
+  if(r) return ai ? r.ai : r.prem;
+  return (ai?k.ai:k.prem)[occ] ?? null;
+}
+function cabinSub(k, occ){ const r=bedRule(k.code, occ); return r ? r.sub : ''; }
+
 /* ---------- Konstellationen ---------- */
 function partitions(n, max, minPart){
   const out=[];
@@ -314,9 +326,9 @@ function combos(opts){
         let ship=0; const cab=[];
         for(let j=0;j<part.length;j++){
           const x=acc[j], occ=part[j];
-          const price=(x.ai?x.k.ai:x.k.prem)[occ];
+          const price=cabinPrice(x.k, occ, x.ai);
           if(price==null) return;
-          ship+=price; cab.push({occ, name:x.k.name, code:x.k.code, ai:x.ai, price});
+          ship+=price; cab.push({occ, name:x.k.name+(cabinSub(x.k,occ)?` (${cabinSub(x.k,occ)})`:''), code:x.k.code, ai:x.ai, price});
         }
         res.push({part, cab, ship});
         return;
@@ -390,11 +402,17 @@ function renderReco(){
 /* ---------- Kabinen ---------- */
 function renderCabins(){
   $('cabinRows').innerHTML=D.cabins.map(k=>{
-    const cell=(o,n)=>o[n]==null?'<td class="num muted">–</td>':`<td class="num">${eur(o[n])}<br><span class="small muted">(${eur(o[n]/n)})</span></td>`;
-    return `<tr><td><b>${k.name}</b><br><span class="small muted">PREMIUM</span></td>${[1,2,3,4].map(n=>cell(k.prem,n)).join('')}</tr>
-            <tr><td><b>${k.name}</b><br><span class="tag ai">All Inclusive</span></td>${[1,2,3,4].map(n=>cell(k.ai,n)).join('')}</tr>`;
+    const cell=(ai,n)=>{
+      if(bedRule(k.code,n)===null) return '<td class="num"><span class="tag bad">nur Pullman</span></td>';
+      const v=cabinPrice(k,n,ai); if(v==null) return '<td class="num muted">–</td>';
+      const sub=cabinSub(k,n);
+      return `<td class="num">${eur(v)}<br><span class="small muted">(${eur(v/n)})${sub?` · nur ${sub}`:''}</span></td>`;
+    };
+    return `<tr><td><b>${k.name}</b><br><span class="small muted">PREMIUM</span></td>${[1,2,3,4].map(n=>cell(false,n)).join('')}</tr>
+            <tr><td><b>${k.name}</b><br><span class="tag ai">All Inclusive</span></td>${[1,2,3,4].map(n=>cell(true,n)).join('')}</tr>`;
   }).join('');
   const t=D.tariffs; const off=Object.entries(t).filter(([k,v])=>!v).map(([k])=>k);
+  $('bedNote').innerHTML=`<b>Keine Pullman-Betten:</b> Ein Pullman-Bett ist ein Klappbett, das an der Wand bzw. Decke hängt. Wir rechnen nur mit Kabinen, in denen die 3. und 4. Person auf einer Bettcouch schläft: <b>Innenkabine zu dritt nur Kategorie IA</b> (Bevorzugte Lage, ${eur(cabinPrice(D.cabins.find(c=>c.code==='I'),3,false))} statt ${eur(D.cabins.find(c=>c.code==='I').prem[3])} für IB), <b>Innen und Meerblick nicht zu viert</b>. Balkon, Veranda und Suiten haben nur Bettcouches – dort passt jede Belegung.`;
   $('tariffNote').innerHTML=`All Inclusive kostet hier rund <b>230 € pro Person</b> mehr (Getränke-Paket, WLAN u. a.). ${D.cruise.earlyBird}.` + (off.length?` Derzeit nicht buchbar: ${off.join(', ')}.`:'');
 }
 

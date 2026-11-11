@@ -358,8 +358,8 @@
       "date": "2026-11-11",
       "I2": 1730,
       "I2AI": 2190,
-      "I3": 1950,
-      "I3AI": 2640,
+      "I3": 2050,
+      "I3AI": 2740,
       "B2": 2500,
       "B2AI": 2960,
       "B3": 2640,
@@ -370,5 +370,20 @@
       "railRueck5": 199.95
     }
   ],
-  "alerts": []
+  "alerts": [],
+  "beds": {
+    "note": "Keine Pullman-Betten (Klappbett an der Decke). Bettenarten AIDAnova laut ahoi-schiff.de: Innen IA = 3. Bett Bettcouch, IB/IC = 3. Bett Pullman; Innen/Meerblick 4. Bett = Pullman; Balkon, Veranda, Suiten nur Bettcouches.",
+    "checked": "2026-11-11",
+    "I": {
+      "3": {
+        "sub": "IA",
+        "prem": 2050,
+        "ai": 2740
+      },
+      "4": null
+    },
+    "M": {
+      "4": null
+    }
+  }
 }
