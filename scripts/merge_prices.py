@@ -7,6 +7,7 @@ snapshot.json (written by the daily agent from the browser) looks like:
   "cabins":  [{"code":"I","prem":{"1":..,"2":..},"ai":{...}}, ...],
   "tariffs": {"LIGHT":false,"CLASSIC":false,"PREMIUM":true,"PREMIUM_AI":true},
   "beds":    {"I": {"3": {"sub":"IA","prem":2050,"ai":2740}}},   # Pflicht-Unterkategorie ohne Pullman-Bett
+  "availability": {"IA3": {"total": 17, "perDeck": {"10": 2, ...}}}  # freie Kabinen IA für 3 Personen
   "rail":    {"hin":[{"ab":"06:15","an":"10:29","zug":"...","k2":{"1":..,"5":..,"6":..},"k1":{...}}], "rueck":[...]}
 }
 Any part may be missing (e.g. if bahn.de failed); missing parts keep the old values.
@@ -58,6 +59,22 @@ def main(snapshot_path):
                     cur[tarif] = price
             data["beds"]["checked"] = today
 
+    # Freie Kabinen zählen (IA für 3 Personen) – Warnung bei Schwellen
+    av_new = (snap.get("availability") or {}).get("IA3")
+    if av_new and isinstance(av_new.get("total"), int):
+        av = data.setdefault("availability", {})
+        prev_total = (av.get("IA3") or {}).get("total")
+        now_total = av_new["total"]
+        for limit in (10, 6, 3):
+            if now_total <= limit and (prev_total is None or prev_total > limit):
+                alerts.append({"date": today, "type": "warn",
+                               "text": f"Nur noch {now_total} Innenkabinen IA für 3 Personen frei – zu sechst brauchen wir 2! Bald buchen."})
+                break
+        if now_total == 0 and prev_total:
+            alerts.append({"date": today, "type": "warn", "text": "Innenkabine IA für 3 Personen ist ausgebucht."})
+        av["IA3"] = {**(av.get("IA3") or {}), **av_new}
+        av["checked"] = today
+
     if snap.get("tariffs"):
         for k, v in snap["tariffs"].items():
             if v and not data["tariffs"].get(k):
@@ -92,6 +109,7 @@ def main(snapshot_path):
             rule = (beds.get(code) or {}).get(occ)
             point[f"{code}{occ}"] = rule["prem"] if rule else cab[code]["prem"].get(occ)
             point[f"{code}{occ}AI"] = rule["ai"] if rule else cab[code]["ai"].get(occ)
+    point["IA3free"] = ((data.get("availability") or {}).get("IA3") or {}).get("total")
     point["railHin6"] = cheapest(data["rail"]["hin"], "k2", "6")
     point["railRueck6"] = cheapest(data["rail"]["rueck"], "k2", "6")
     point["railHin5"] = cheapest(data["rail"]["hin"], "k2", "5")

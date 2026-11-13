@@ -152,6 +152,7 @@ footer{padding:28px 0 40px;color:var(--muted);font-size:13px}
   <h2>Unsere besten Varianten</h2>
   <p class="lead">Gesamtpreis für die ganze Gruppe: Kreuzfahrt + Bahn Hanau ⇄ Hamburg (2. Klasse). Mindestens die Hälfte von uns hat All Inclusive. Budget: 1.200 € pro Person.</p>
   <div id="alerts"></div>
+  <div id="avail"></div>
   <h3 class="grp">Wenn wir 6 sind <span id="budget6"></span></h3>
   <div class="grid3" id="reco6"></div>
   <h3 class="grp">Wenn wir 5 sind <span id="budget5"></span></h3>
@@ -250,7 +251,7 @@ function init(){
   $('singles').onchange=e=>{state.singles=e.target.checked;render();};
   $('mix').onchange=e=>{state.mix=e.target.checked;render();};
   $('budget').oninput=e=>{state.budget=Number(e.target.value)||0;render();renderReco();};
-  renderAlerts(); renderCabins(); renderRail(); renderHistory(); renderReco(); render();
+  renderAlerts(); renderAvail(); renderCabins(); renderRail(); renderHistory(); renderReco(); render();
 }
 function seg(id,key,cast){ $(id).addEventListener('click',e=>{const b=e.target.closest('button'); if(!b)return; [...$(id).children].forEach(x=>x.classList.toggle('on',x===b)); state[key]=cast(b.dataset.v); shown=10; render();}); }
 
@@ -464,6 +465,13 @@ function renderHistory(){
   }
   $('chart').innerHTML=`<svg viewBox="0 0 ${W} ${H}" style="color:var(--ink)" role="img" aria-label="Preisverlauf Kabinenpreise">${g}</svg>`+(h.length<2?'<p class="small muted" style="margin:6px 0 0">Erst eine Messung – die Linie entsteht ab morgen.</p>':'');
   $('legend').innerHTML=SERIES.map(s=>`<span><i style="background:${s.color}"></i>${s.label}</span>`).join('');
+}
+function renderAvail(){
+  const a=(D.availability||{}).IA3; if(!a){ $('avail').innerHTML=''; return; }
+  const prev=[...D.history].reverse().find(h=>h.date<D.availability.checked && h.IA3free!=null);
+  const diff=prev? a.total-prev.IA3free : 0;
+  const cls=a.total<=6?'warn':(a.total<=10?'warn':'');
+  $('avail').innerHTML=`<div class="note ${cls}"><b>Noch ${a.total} Innenkabinen IA für 3 Personen frei</b>${diff?` (${diff>0?'+':''}${diff} seit ${fmtDate(prev.date)})`:''} – zu sechst brauchen wir 2 davon. <span class="muted small">Stand ${fmtDate(D.availability.checked)}, wird täglich gezählt.</span></div>`;
 }
 function renderAlerts(){
   const a=(D.alerts||[]).slice(-3).reverse();

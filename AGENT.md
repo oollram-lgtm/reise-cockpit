@@ -39,6 +39,21 @@ Der IA-Preis steht nicht im JSON oben, sondern nur im Buchungsablauf (nichts buc
 3. Für PREMIUM: „Ich möchte ohne “PREMIUM ALL IN” fortfahren“ anklicken → Seitentext lesen: Zeile „Bevorzugte Lage (IA) … ab X €“ = `prem`.
 4. Schritte 1–2 wiederholen, dann „“PREMIUM ALL IN” auswählen“ anklicken → „Bevorzugte Lage (IA) … ab Y €“ = `ai`.
 5. Im Snapshot ergänzen: `"beds": {"I": {"3": {"sub": "IA", "prem": X, "ai": Y}}}`.
+6. **Freie IA-Kabinen zählen** (nach Schritt 3, also im PREMIUM-Pfad ohne ALL IN, solange die Kategorieliste sichtbar ist;
+   sonst Schritte 1–3 wiederholen). Dieses Snippet per javascript_tool ausführen – es wählt IA, öffnet die Kabinenauswahl
+   und zählt je Deck die angebotenen Kabinennummern. Es wird **nichts** ausgewählt oder gebucht:
+```js
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const radios=[...document.querySelectorAll('input[type=radio]')];
+const ia=radios.find(r=>{const l=r.closest('label')||document.querySelector(`label[for="${r.id}"]`)||r.parentElement; return /\(IA\)/.test((l&&l.textContent)||'')||/\(IA\)/.test(r.parentElement?.parentElement?.textContent||'');});
+if(!ia) throw new Error('IA-Option nicht gefunden'); ia.click(); await sleep(500);
+const btn=[...document.querySelectorAll('button,a,[role=button]')].find(b=>/Kabinenkategorie auswählen/.test(b.textContent)); if(!btn) throw new Error('Button fehlt'); btn.click();
+let d=null; for(let i=0;i<20&&!(d=document.getElementById('cabin-picker-deck'));i++) await sleep(500);
+if(!d) throw new Error('Deckliste nicht gefunden');
+const res={}; for(const o of [...d.options].filter(o=>o.value!=='Deck')){ d.value=o.value; d.dispatchEvent(new Event('change',{bubbles:true})); await sleep(900); res[o.value]=[...document.getElementById('cabin-picker-cabin').options].filter(x=>x.value!=='Kabine').length; }
+JSON.stringify({perDeck:res,total:Object.values(res).reduce((s,n)=>s+n,0)})
+```
+   Ergebnis in den Snapshot: `"availability": {"IA3": {"total": N, "perDeck": {...}}}`. Schlägt das Snippet fehl, `availability` weglassen.
    Steht bei IA „Nicht verfügbar“: `beds` weglassen und Oliver per Push informieren („IA zu dritt nicht mehr verfügbar“).
 
 ## 2. Bahnpreise – NICHT automatisch
@@ -49,7 +64,7 @@ dann `rail.hin`/`rail.rueck` und `rail.checked` in `site/data/prices.json` anpas
 Zeitregeln der Gruppe: Ankunft Hamburg Hbf bis 12:30, Rückfahrt ab 11:00, max. 4:45 h, max. 1 Umstieg.
 
 ## 3. Zusammenführen und veröffentlichen
-1. Das AIDA-Ergebnis als `snapshot.json` im Scratchpad speichern (`cabins`, `tariffs`, `beds`).
+1. Das AIDA-Ergebnis als `snapshot.json` im Scratchpad speichern (`cabins`, `tariffs`, `beds`, `availability`).
    Schlägt der Abruf fehl, nichts speichern und Oliver informieren – nie Werte erfinden.
 2. `python scripts/merge_prices.py <pfad>/snapshot.json`
 3. `git add site/data/prices.json && git commit -m "Preise <Datum>" && git push`
