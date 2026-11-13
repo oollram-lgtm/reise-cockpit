@@ -88,7 +88,24 @@ def main(snapshot_path):
                 alerts.append({"date": today, "type": "down", "text": f"Neuer Tarif buchbar: {k} – meist günstiger als PREMIUM!"})
         data["tariffs"] = snap["tariffs"]
 
-    def cheapest(lst, key, n):
+    rules = {"hinLatestArrival": "12:30", "rueckEarliestDeparture": "11:00", "maxMinutes": 285, "maxTransfers": 1,
+             **((data.get("rail") or {}).get("rules") or {})}
+    mins = lambda hhmm: int(hhmm[:2]) * 60 + int(hhmm[3:5])
+
+    def fits(t, direction):
+        # nur Züge, die zu Check-in/Ausschiffung passen (gleiche Regeln wie auf der Webseite)
+        if direction == "hin" and mins(t["an"]) > mins(rules["hinLatestArrival"]):
+            return False
+        if direction == "rueck" and mins(t["ab"]) < mins(rules["rueckEarliestDeparture"]):
+            return False
+        dauer = t.get("dauer", mins(t["an"]) - mins(t["ab"]))
+        if dauer > rules["maxMinutes"] or (t.get("umst") or 0) > rules["maxTransfers"]:
+            return False
+        return True
+
+    def cheapest(lst, key, n, direction=None):
+        if direction:
+            lst = [t for t in lst if fits(t, direction)]
         vals = [t.get(key, {}).get(n) for t in lst]
         vals = [v for v in vals if v is not None]
         return min(vals) if vals else None
@@ -101,8 +118,8 @@ def main(snapshot_path):
                 if new:
                     print(f"WARN: Bahn {direction} unvollständig – alte Werte bleiben")
                 continue
-            prev6 = cheapest(data["rail"][direction], "k2", "6")
-            now6 = cheapest(new, "k2", "6")
+            prev6 = cheapest(data["rail"][direction], "k2", "6", direction)
+            now6 = cheapest(new, "k2", "6", direction)
             if prev6 and now6 and prev6 - now6 >= 10:
                 alerts.append({"date": today, "type": "down",
                                "text": f"Bahn {'Hinfahrt' if direction == 'hin' else 'Rückfahrt'} (6er-Gruppe): {prev6:.2f} € → {now6:.2f} €"})
@@ -118,10 +135,10 @@ def main(snapshot_path):
             point[f"{code}{occ}AI"] = rule["ai"] if rule else cab[code]["ai"].get(occ)
     point["IA3free"] = ((data.get("availability") or {}).get("IA3") or {}).get("total")
     point["I2free"] = ((data.get("availability") or {}).get("I2") or {}).get("total")
-    point["railHin6"] = cheapest(data["rail"]["hin"], "k2", "6")
-    point["railRueck6"] = cheapest(data["rail"]["rueck"], "k2", "6")
-    point["railHin5"] = cheapest(data["rail"]["hin"], "k2", "5")
-    point["railRueck5"] = cheapest(data["rail"]["rueck"], "k2", "5")
+    point["railHin6"] = cheapest(data["rail"]["hin"], "k2", "6", "hin")
+    point["railRueck6"] = cheapest(data["rail"]["rueck"], "k2", "6", "rueck")
+    point["railHin5"] = cheapest(data["rail"]["hin"], "k2", "5", "hin")
+    point["railRueck5"] = cheapest(data["rail"]["rueck"], "k2", "5", "rueck")
     data["history"] = [h for h in data["history"] if h["date"] != today] + [point]
 
     data["alerts"] = (data.get("alerts") or []) + alerts

@@ -425,7 +425,7 @@ function renderRail(){
   $('railRueck').innerHTML=D.rail.rueck.map(row('rueck')).join('');
   const R=rules();
   $('railRules').innerHTML=`<b>Unsere Zeitregeln:</b> Check-in ab ${R.checkin||'15:00'} Uhr, Abfahrt Schiff ${D.cruise.departure.split(', ')[1]} → Ankunft Hamburg Hbf <b>spätestens ${R.hinLatestArrival} Uhr</b> (30–45 Min. Transfer zum Terminal + Puffer für Verspätungen). Rückkehr: Schiff legt ${D.cruise.arrival.split(', ')[1]} an → Zug ab Hamburg <b>frühestens ${R.rueckEarliestDeparture} Uhr</b>. Fahrzeit max. ${fmtDur(R.maxMinutes)}, max. ${R.maxTransfers} Umstieg. Nicht passende Züge sind ausgegraut und werden nicht berechnet.`;
-  $('railLead').innerHTML=D.rail.note+(D.rail.checked?` <b>Stand: ${fmtDate(D.rail.checked)}.</b>`:'');
+  $('railLead').innerHTML=D.rail.note+(D.rail.checked?` <b>Stand: ${fmtDate(D.rail.checked)}.</b>`:'')+(D.rail.checkedNote?` <span class="small muted">${D.rail.checkedNote}</span>`:'');
   const r5=railCost(5,'2'), r6=railCost(6,'2');
   const m5=(l,d)=>Math.min(...l.filter(t=>railOk(t,d).ok&&t.k2['5']!=null).map(t=>t.k2['5']));
   const plain5=m5(D.rail.hin,'hin')+m5(D.rail.rueck,'rueck');
