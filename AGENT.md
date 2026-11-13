@@ -39,22 +39,33 @@ Der IA-Preis steht nicht im JSON oben, sondern nur im Buchungsablauf (nichts buc
 3. Für PREMIUM: „Ich möchte ohne “PREMIUM ALL IN” fortfahren“ anklicken → Seitentext lesen: Zeile „Bevorzugte Lage (IA) … ab X €“ = `prem`.
 4. Schritte 1–2 wiederholen, dann „“PREMIUM ALL IN” auswählen“ anklicken → „Bevorzugte Lage (IA) … ab Y €“ = `ai`.
 5. Im Snapshot ergänzen: `"beds": {"I": {"3": {"sub": "IA", "prem": X, "ai": Y}}}`.
-6. **Freie IA-Kabinen zählen** (nach Schritt 3, also im PREMIUM-Pfad ohne ALL IN, solange die Kategorieliste sichtbar ist;
-   sonst Schritte 1–3 wiederholen). Dieses Snippet per javascript_tool ausführen – es wählt IA, öffnet die Kabinenauswahl
-   und zählt je Deck die angebotenen Kabinennummern. Es wird **nichts** ausgewählt oder gebucht:
+6. **Freie Kabinen zählen.** Auf der Kategorieliste (nach Schritt 3, PREMIUM ohne ALL IN) dieses Snippet per javascript_tool
+   ausführen. Es wählt nacheinander die Kategorien, öffnet die Kabinenauswahl, zählt je Deck die angebotenen
+   Kabinennummern und geht zurück. Es wird **nichts** ausgewählt oder gebucht. `CATS` je nach Durchgang setzen:
+   - Durchgang **3 Personen** (Schritt 1 mit `adults=3`): `CATS=['IA']` → Snapshot `availability.IA3`
+   - Durchgang **2 Personen** (Schritte 1–3 mit `adults=2` wiederholen): `CATS=['IC','IB','IA']` → Snapshot `availability.I2`
 ```js
+const CATS=['IA'];   // bzw. ['IC','IB','IA'] im 2-Personen-Durchgang
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-const radios=[...document.querySelectorAll('input[type=radio]')];
-const ia=radios.find(r=>{const l=r.closest('label')||document.querySelector(`label[for="${r.id}"]`)||r.parentElement; return /\(IA\)/.test((l&&l.textContent)||'')||/\(IA\)/.test(r.parentElement?.parentElement?.textContent||'');});
-if(!ia) throw new Error('IA-Option nicht gefunden'); ia.click(); await sleep(500);
-const btn=[...document.querySelectorAll('button,a,[role=button]')].find(b=>/Kabinenkategorie auswählen/.test(b.textContent)); if(!btn) throw new Error('Button fehlt'); btn.click();
-let d=null; for(let i=0;i<20&&!(d=document.getElementById('cabin-picker-deck'));i++) await sleep(500);
-if(!d) throw new Error('Deckliste nicht gefunden');
-const res={}; for(const o of [...d.options].filter(o=>o.value!=='Deck')){ d.value=o.value; d.dispatchEvent(new Event('change',{bubbles:true})); await sleep(900); res[o.value]=[...document.getElementById('cabin-picker-cabin').options].filter(x=>x.value!=='Kabine').length; }
-JSON.stringify({perDeck:res,total:Object.values(res).reduce((s,n)=>s+n,0)})
+async function back(){ const s=[...document.querySelectorAll('span')].find(e=>/^\s*Zurück zur Kabinenkategorie\s*$/.test(e.textContent)); if(s){ (s.closest('a,button')||s).click(); for(let i=0;i<20&&document.getElementById('cabin-picker-deck');i++) await sleep(500); await sleep(1200);} }
+async function countCat(code){
+  await back();
+  const re=new RegExp('\\('+code+'\\)');
+  const r=[...document.querySelectorAll('input[type=radio]')].find(x=>re.test(x.parentElement?.parentElement?.textContent||'')||re.test((x.closest('label')||x.parentElement).textContent));
+  if(!r) return null; if(r.disabled) return 0;
+  r.click(); await sleep(1200);
+  const b=[...document.querySelectorAll('button')].find(b=>/Kabinenkategorie auswählen/.test(b.textContent)); if(!b) return null; b.click();
+  let d=null; for(let i=0;i<30&&!(d=document.getElementById('cabin-picker-deck'));i++) await sleep(500);
+  if(!d) return null;
+  let n=0; for(const o of [...d.options].filter(o=>o.value!=='Deck')){ d.value=o.value; d.dispatchEvent(new Event('change',{bubbles:true})); await sleep(900); n+=[...document.getElementById('cabin-picker-cabin').options].filter(x=>x.value!=='Kabine').length; }
+  return n;
+}
+const byCat={}; for(const c of CATS) byCat[c]=await countCat(c); await back();
+JSON.stringify({byCat,total:Object.values(byCat).reduce((s,n)=>s+(n||0),0),failed:Object.keys(byCat).filter(k=>byCat[k]===null)})
 ```
-   Ergebnis in den Snapshot: `"availability": {"IA3": {"total": N, "perDeck": {...}}}`. Schlägt das Snippet fehl, `availability` weglassen.
-   Steht bei IA „Nicht verfügbar“: `beds` weglassen und Oliver per Push informieren („IA zu dritt nicht mehr verfügbar“).
+   „Nicht verfügbar“ zählt als 0. Ist `failed` nicht leer, den betreffenden Durchgang im Snapshot weglassen (nicht raten).
+   Hinweis: AIDA listet höchstens 100 Kabinen je Kategorie – 100 heißt „100 oder mehr“.
+   Snapshot: `"availability": {"IA3": {"total": N, "byCat": {...}}, "I2": {"total": M, "byCat": {...}}}`.
 
 ## 2. Bahnpreise – NICHT automatisch
 bahn.de erkennt automatisierte Abfragen als Bot (Fehler 751 / `OPS_BLOCKED`) und sperrt dann auch die normale Seite.

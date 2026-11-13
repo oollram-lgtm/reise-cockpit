@@ -467,11 +467,16 @@ function renderHistory(){
   $('legend').innerHTML=SERIES.map(s=>`<span><i style="background:${s.color}"></i>${s.label}</span>`).join('');
 }
 function renderAvail(){
-  const a=(D.availability||{}).IA3; if(!a){ $('avail').innerHTML=''; return; }
-  const prev=[...D.history].reverse().find(h=>h.date<D.availability.checked && h.IA3free!=null);
-  const diff=prev? a.total-prev.IA3free : 0;
-  const cls=a.total<=6?'warn':(a.total<=10?'warn':'');
-  $('avail').innerHTML=`<div class="note ${cls}"><b>Noch ${a.total} Innenkabinen IA für 3 Personen frei</b>${diff?` (${diff>0?'+':''}${diff} seit ${fmtDate(prev.date)})`:''} – zu sechst brauchen wir 2 davon. <span class="muted small">Stand ${fmtDate(D.availability.checked)}, wird täglich gezählt.</span></div>`;
+  const A=D.availability||{}; if(!A.IA3 && !A.I2){ $('avail').innerHTML=''; return; }
+  const cap=A.cap||100;
+  const fmtN=n=>n>=cap?`${cap}+`:String(n);
+  const delta=key=>{ const prev=[...D.history].reverse().find(h=>h.date<A.checked && h[key]!=null); const cur=D.history.find(h=>h.date===A.checked)?.[key];
+    return (prev && cur!=null && cur!==prev[key]) ? ` <span class="small muted">(${cur-prev[key]>0?'+':''}${cur-prev[key]} seit ${fmtDate(prev.date)})</span>` : ''; };
+  const rows=[];
+  if(A.IA3) rows.push(`<li><b>${A.IA3.total}</b> Innenkabinen <b>IA für 3 Personen</b> (ohne Pullman)${delta('IA3free')} – zu sechst brauchen wir 2.</li>`);
+  if(A.I2){ const c=A.I2.byCat||{}; rows.push(`<li><b>${Object.values(c).some(n=>n>=cap)?'über '+A.I2.total:A.I2.total}</b> Innenkabinen <b>für 2 Personen</b>${delta('I2free')}: ${['IC','IB','IA'].filter(k=>k in c).map(k=>`${k} ${fmtN(c[k])}`).join(' · ')}</li>`); }
+  const low=(A.IA3&&A.IA3.total<=10)||(A.I2&&A.I2.total<=30);
+  $('avail').innerHTML=`<div class="note ${low?'warn':''}"><b>Noch frei bei AIDA:</b><ul style="margin:6px 0 4px;padding-left:20px">${rows.join('')}</ul><span class="muted small">Stand ${fmtDate(A.checked)}, wird täglich gezählt. AIDA zeigt höchstens ${cap} Kabinen je Kategorie an.</span></div>`;
 }
 function renderAlerts(){
   const a=(D.alerts||[]).slice(-3).reverse();

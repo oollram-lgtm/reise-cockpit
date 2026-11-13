@@ -398,7 +398,8 @@
       "railRueck6": 197.94,
       "railHin5": 234.95,
       "railRueck5": 199.95,
-      "IA3free": 17
+      "IA3free": 17,
+      "I2free": 271
     }
   ],
   "alerts": [],
@@ -428,8 +429,21 @@
         "15": 3,
         "17": 1
       },
-      "label": "Innenkabine IA für 3 Personen (PREMIUM)"
+      "label": "Innenkabine IA für 3 Personen (PREMIUM)",
+      "byCat": {
+        "IA": 17
+      }
     },
-    "checked": "2026-11-13"
+    "checked": "2026-11-13",
+    "I2": {
+      "byCat": {
+        "IC": 71,
+        "IB": 100,
+        "IA": 100
+      },
+      "total": 271,
+      "label": "Innenkabinen für 2 Personen (PREMIUM)"
+    },
+    "cap": 100
   }
 }

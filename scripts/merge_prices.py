@@ -7,7 +7,8 @@ snapshot.json (written by the daily agent from the browser) looks like:
   "cabins":  [{"code":"I","prem":{"1":..,"2":..},"ai":{...}}, ...],
   "tariffs": {"LIGHT":false,"CLASSIC":false,"PREMIUM":true,"PREMIUM_AI":true},
   "beds":    {"I": {"3": {"sub":"IA","prem":2050,"ai":2740}}},   # Pflicht-Unterkategorie ohne Pullman-Bett
-  "availability": {"IA3": {"total": 17, "perDeck": {"10": 2, ...}}}  # freie Kabinen IA für 3 Personen
+  "availability": {"IA3": {"total": 17, "byCat": {"IA": 17}},              # freie Kabinen IA für 3 Personen
+                   "I2":  {"total": 271, "byCat": {"IC": 71, "IB": 100, "IA": 100}}}  # Innen für 2 (max. 100 je Kategorie sichtbar)
   "rail":    {"hin":[{"ab":"06:15","an":"10:29","zug":"...","k2":{"1":..,"5":..,"6":..},"k1":{...}}], "rueck":[...]}
 }
 Any part may be missing (e.g. if bahn.de failed); missing parts keep the old values.
@@ -59,20 +60,26 @@ def main(snapshot_path):
                     cur[tarif] = price
             data["beds"]["checked"] = today
 
-    # Freie Kabinen zählen (IA für 3 Personen) – Warnung bei Schwellen
-    av_new = (snap.get("availability") or {}).get("IA3")
-    if av_new and isinstance(av_new.get("total"), int):
+    # Freie Kabinen zählen – Warnung beim Unterschreiten von Schwellen
+    AVAIL = {
+        "IA3": ((10, 6, 3), "Innenkabinen IA für 3 Personen", "zu sechst brauchen wir 2"),
+        "I2":  ((30, 15, 5), "Innenkabinen für 2 Personen", "für 2er-Varianten"),
+    }
+    for key, (limits, label, need) in AVAIL.items():
+        new = (snap.get("availability") or {}).get(key)
+        if not new or not isinstance(new.get("total"), int):
+            continue
         av = data.setdefault("availability", {})
-        prev_total = (av.get("IA3") or {}).get("total")
-        now_total = av_new["total"]
-        for limit in (10, 6, 3):
+        prev_total = (av.get(key) or {}).get("total")
+        now_total = new["total"]
+        for limit in limits:
             if now_total <= limit and (prev_total is None or prev_total > limit):
                 alerts.append({"date": today, "type": "warn",
-                               "text": f"Nur noch {now_total} Innenkabinen IA für 3 Personen frei – zu sechst brauchen wir 2! Bald buchen."})
+                               "text": f"Nur noch {now_total} {label} frei ({need}) – bald buchen."})
                 break
         if now_total == 0 and prev_total:
-            alerts.append({"date": today, "type": "warn", "text": "Innenkabine IA für 3 Personen ist ausgebucht."})
-        av["IA3"] = {**(av.get("IA3") or {}), **av_new}
+            alerts.append({"date": today, "type": "warn", "text": f"{label}: ausgebucht."})
+        av[key] = {**(av.get(key) or {}), **new}
         av["checked"] = today
 
     if snap.get("tariffs"):
@@ -110,6 +117,7 @@ def main(snapshot_path):
             point[f"{code}{occ}"] = rule["prem"] if rule else cab[code]["prem"].get(occ)
             point[f"{code}{occ}AI"] = rule["ai"] if rule else cab[code]["ai"].get(occ)
     point["IA3free"] = ((data.get("availability") or {}).get("IA3") or {}).get("total")
+    point["I2free"] = ((data.get("availability") or {}).get("I2") or {}).get("total")
     point["railHin6"] = cheapest(data["rail"]["hin"], "k2", "6")
     point["railRueck6"] = cheapest(data["rail"]["rueck"], "k2", "6")
     point["railHin5"] = cheapest(data["rail"]["hin"], "k2", "5")
