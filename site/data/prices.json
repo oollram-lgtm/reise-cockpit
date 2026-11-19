@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-18T07:54:09+01:00",
+  "updated": "2026-11-19T07:29:25+01:00",
   "cruise": {
     "id": "NO07270424",
     "title": "Skandinavische Highlights ab Hamburg",
@@ -34,96 +34,96 @@
       "code": "I",
       "name": "Innenkabine",
       "prem": {
-        "1": 1585,
-        "2": 1730,
-        "3": 1950,
-        "4": 2090
+        "1": 1510,
+        "2": 1580,
+        "3": 1800,
+        "4": 1940
       },
       "ai": {
-        "1": 1815,
-        "2": 2190,
-        "3": 2640,
-        "4": 3010
+        "1": 1720,
+        "2": 2000,
+        "3": 2430,
+        "4": 2780
       }
     },
     {
       "code": "M",
       "name": "Meerblickkabine",
       "prem": {
-        "1": 2000,
-        "2": 2220,
-        "3": 2360,
-        "4": 2640
+        "1": 1925,
+        "2": 2070,
+        "3": 2210,
+        "4": 2490
       },
       "ai": {
-        "1": 2230,
-        "2": 2680,
-        "3": 3050,
-        "4": 3560
+        "1": 2135,
+        "2": 2490,
+        "3": 2840,
+        "4": 3330
       }
     },
     {
       "code": "B",
       "name": "Balkonkabine",
       "prem": {
-        "1": 2230,
-        "2": 2500,
-        "3": 2640,
-        "4": 2780
+        "1": 2155,
+        "2": 2350,
+        "3": 2490,
+        "4": 2630
       },
       "ai": {
-        "1": 2460,
-        "2": 2960,
-        "3": 3330,
-        "4": 3700
+        "1": 2365,
+        "2": 2770,
+        "3": 3120,
+        "4": 3470
       }
     },
     {
       "code": "K",
       "name": "Verandakabine Komfort",
       "prem": {
-        "1": 2340,
-        "2": 2620,
-        "3": 2760,
-        "4": 2900
+        "1": 2265,
+        "2": 2470,
+        "3": 2610,
+        "4": 2750
       },
       "ai": {
-        "1": 2570,
-        "2": 3080,
-        "3": 3450,
-        "4": 3820
+        "1": 2475,
+        "2": 2890,
+        "3": 3240,
+        "4": 3590
       }
     },
     {
       "code": "D",
       "name": "Verandakabine Deluxe",
       "prem": {
-        "1": 2775,
-        "2": 3130,
-        "3": 3270,
-        "4": 3410
+        "1": 2700,
+        "2": 2980,
+        "3": 3120,
+        "4": 3260
       },
       "ai": {
-        "1": 3005,
-        "2": 3590,
-        "3": 3960,
-        "4": 4330
+        "1": 2910,
+        "2": 3400,
+        "3": 3750,
+        "4": 4100
       }
     },
     {
       "code": "J",
       "name": "Junior-Suite",
       "prem": {
-        "1": 3490,
-        "2": 3980,
-        "3": 4120,
-        "4": 4260
+        "1": 3415,
+        "2": 3830,
+        "3": 3970,
+        "4": 4110
       },
       "ai": {
-        "1": 3720,
-        "2": 4440,
-        "3": 4810,
-        "4": 5180
+        "1": 3625,
+        "2": 4250,
+        "3": 4600,
+        "4": 4950
       }
     },
     {
@@ -135,9 +135,9 @@
         "4": 5540
       },
       "ai": {
-        "2": 5720,
-        "3": 6090,
-        "4": 6460
+        "2": 5680,
+        "3": 6030,
+        "4": 6380
       }
     }
   ],
@@ -514,17 +514,185 @@
       "railRueck6": 137.94,
       "railHin5": 234.95,
       "railRueck5": 199.95
+    },
+    {
+      "date": "2026-11-19",
+      "I2": 1580,
+      "I2AI": 2000,
+      "I3": 1900,
+      "I3AI": 2530,
+      "B2": 2350,
+      "B2AI": 2770,
+      "B3": 2490,
+      "B3AI": 3120,
+      "IA3free": 16,
+      "I2free": 270,
+      "railHin6": 197.94,
+      "railRueck6": 137.94,
+      "railHin5": 234.95,
+      "railRueck5": 199.95
     }
   ],
-  "alerts": [],
+  "alerts": [
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Balkonkabine All Inclusive für 4 Pers.: 3700 € → 3470 € (−230 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Verandakabine Komfort PREMIUM für 1 Pers.: 2340 € → 2265 € (−75 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Verandakabine Komfort PREMIUM für 2 Pers.: 2620 € → 2470 € (−150 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Verandakabine Komfort PREMIUM für 3 Pers.: 2760 € → 2610 € (−150 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Verandakabine Komfort PREMIUM für 4 Pers.: 2900 € → 2750 € (−150 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Verandakabine Komfort All Inclusive für 1 Pers.: 2570 € → 2475 € (−95 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Verandakabine Komfort All Inclusive für 2 Pers.: 3080 € → 2890 € (−190 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Verandakabine Komfort All Inclusive für 3 Pers.: 3450 € → 3240 € (−210 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Verandakabine Komfort All Inclusive für 4 Pers.: 3820 € → 3590 € (−230 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Verandakabine Deluxe PREMIUM für 1 Pers.: 2775 € → 2700 € (−75 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Verandakabine Deluxe PREMIUM für 2 Pers.: 3130 € → 2980 € (−150 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Verandakabine Deluxe PREMIUM für 3 Pers.: 3270 € → 3120 € (−150 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Verandakabine Deluxe PREMIUM für 4 Pers.: 3410 € → 3260 € (−150 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Verandakabine Deluxe All Inclusive für 1 Pers.: 3005 € → 2910 € (−95 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Verandakabine Deluxe All Inclusive für 2 Pers.: 3590 € → 3400 € (−190 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Verandakabine Deluxe All Inclusive für 3 Pers.: 3960 € → 3750 € (−210 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Verandakabine Deluxe All Inclusive für 4 Pers.: 4330 € → 4100 € (−230 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Junior-Suite PREMIUM für 1 Pers.: 3490 € → 3415 € (−75 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Junior-Suite PREMIUM für 2 Pers.: 3980 € → 3830 € (−150 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Junior-Suite PREMIUM für 3 Pers.: 4120 € → 3970 € (−150 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Junior-Suite PREMIUM für 4 Pers.: 4260 € → 4110 € (−150 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Junior-Suite All Inclusive für 1 Pers.: 3720 € → 3625 € (−95 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Junior-Suite All Inclusive für 2 Pers.: 4440 € → 4250 € (−190 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Junior-Suite All Inclusive für 3 Pers.: 4810 € → 4600 € (−210 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Junior-Suite All Inclusive für 4 Pers.: 5180 € → 4950 € (−230 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Suite All Inclusive für 2 Pers.: 5720 € → 5680 € (−40 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Suite All Inclusive für 3 Pers.: 6090 € → 6030 € (−60 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Suite All Inclusive für 4 Pers.: 6460 € → 6380 € (−80 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Innenkabine IA PREMIUM für 3 Pers.: 2050 € → 1900 € (−150 €)"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "down",
+      "text": "Innenkabine IA All Inclusive für 3 Pers.: 2740 € → 2530 € (−210 €)"
+    }
+  ],
   "beds": {
     "note": "Keine Pullman-Betten (Klappbett an der Decke). Bettenarten AIDAnova laut ahoi-schiff.de: Innen IA = 3. Bett Bettcouch, IB/IC = 3. Bett Pullman; Innen/Meerblick 4. Bett = Pullman; Balkon, Veranda, Suiten nur Bettcouches.",
-    "checked": "2026-11-18",
+    "checked": "2026-11-19",
     "I": {
       "3": {
         "sub": "IA",
-        "prem": 2050,
-        "ai": 2740
+        "prem": 1900,
+        "ai": 2530
       },
       "4": null
     },
@@ -548,7 +716,7 @@
         "IA": 16
       }
     },
-    "checked": "2026-11-18",
+    "checked": "2026-11-19",
     "I2": {
       "byCat": {
         "IC": 70,
