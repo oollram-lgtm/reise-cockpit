@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T07:29:25+01:00",
+  "updated": "2026-11-20T07:54:54+01:00",
   "cruise": {
     "id": "NO07270424",
     "title": "Skandinavische Highlights ab Hamburg",
@@ -531,6 +531,23 @@
       "railRueck6": 137.94,
       "railHin5": 234.95,
       "railRueck5": 199.95
+    },
+    {
+      "date": "2026-11-20",
+      "I2": 1580,
+      "I2AI": 2000,
+      "I3": 1900,
+      "I3AI": 2530,
+      "B2": 2350,
+      "B2AI": 2770,
+      "B3": 2490,
+      "B3AI": 3120,
+      "IA3free": 16,
+      "I2free": 269,
+      "railHin6": 197.94,
+      "railRueck6": 137.94,
+      "railHin5": 234.95,
+      "railRueck5": 199.95
     }
   ],
   "alerts": [
@@ -687,7 +704,7 @@
   ],
   "beds": {
     "note": "Keine Pullman-Betten (Klappbett an der Decke). Bettenarten AIDAnova laut ahoi-schiff.de: Innen IA = 3. Bett Bettcouch, IB/IC = 3. Bett Pullman; Innen/Meerblick 4. Bett = Pullman; Balkon, Veranda, Suiten nur Bettcouches.",
-    "checked": "2026-11-19",
+    "checked": "2026-11-20",
     "I": {
       "3": {
         "sub": "IA",
@@ -716,14 +733,14 @@
         "IA": 16
       }
     },
-    "checked": "2026-11-19",
+    "checked": "2026-11-20",
     "I2": {
       "byCat": {
-        "IC": 70,
+        "IC": 69,
         "IB": 100,
         "IA": 100
       },
-      "total": 270,
+      "total": 269,
       "label": "Innenkabinen für 2 Personen (PREMIUM)"
     },
     "cap": 100
